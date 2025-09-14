@@ -197,6 +197,44 @@ export default function Resume() {
             <section id="education" className="mb-5 scroll-mt-24">
               <h3 className="text-base font-bold text-gray-900 mb-4 uppercase tracking-wide" style={{ letterSpacing: '0.05em' }}>Education</h3>
               
+              {/* Master of Finance - Queen's University */}
+              <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm hover:shadow-md transition-shadow mb-4">
+                <div className="flex gap-3">
+                  <div className="flex-shrink-0">
+                    <div className="w-12 h-12 bg-white rounded-lg shadow-sm flex items-center justify-center border border-blue-200">
+                      <div className="w-7 h-7 bg-blue-600 rounded text-white flex items-center justify-center text-xs font-bold">Q</div>
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex justify-between items-start mb-3">
+                      <div>
+                        <h4 className="text-sm font-semibold text-gray-900">Master of Finance Candidate</h4>
+                        <p className="text-sm text-blue-600 font-medium">Smith School of Business • Queen's University</p>
+                      </div>
+                      <span className="text-xs text-gray-600 px-1.5 py-0.5 rounded">2027</span>
+                    </div>
+                    <ul className="space-y-2">
+                      <li className="text-sm text-gray-700 flex items-start">
+                        <span className="text-blue-500 mr-2">•</span>
+                        <span>Case Competitions: CFA Research Challenge and Investment Banking Competition</span>
+                      </li>
+                      <li className="text-sm text-gray-700 flex items-start">
+                        <span className="text-blue-500 mr-2">•</span>
+                        <span>Analyst - Financial sector - Queen's University Alternative Assets Fund (QUAAF)</span>
+                      </li>
+                      <li className="text-sm text-gray-700 flex items-start">
+                        <span className="text-blue-500 mr-2">•</span>
+                        <span>Member of Finance Club, Case Competition Union and Investment-Banking Clubs</span>
+                      </li>
+                      <li className="text-sm text-gray-700 flex items-start">
+                        <span className="text-blue-500 mr-2">•</span>
+                        <span>Deans Entrance Scholarship Award, Total $2,500</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
               <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex gap-3">
                   <div className="flex-shrink-0">
