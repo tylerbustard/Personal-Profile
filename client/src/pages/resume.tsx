@@ -24,6 +24,7 @@ import bloombergLogo from "@assets/bloomberg_1755923720190.png";
 import wallStreetPrepLogo from "@assets/wall street prep_1755923720193.png";
 import courseraLogo from "@assets/Coursera_1755937682843.png";
 import mcgillLogo from "@assets/mcgill_1755937693386.png";
+import queensLogo from "@assets/Untitled design_1757864207961.png";
 
 export default function Resume() {
   const isPageLoaded = useInitialPageAnimation(400);
@@ -202,7 +203,7 @@ export default function Resume() {
                 <div className="flex gap-3">
                   <div className="flex-shrink-0">
                     <div className="w-12 h-12 bg-white rounded-lg shadow-sm flex items-center justify-center border border-blue-200">
-                      <div className="w-7 h-7 bg-blue-600 rounded text-white flex items-center justify-center text-xs font-bold">Q</div>
+                      <img src={queensLogo} alt="Queen's University" className="w-7 h-7 object-contain" />
                     </div>
                   </div>
                   <div className="flex-1">
