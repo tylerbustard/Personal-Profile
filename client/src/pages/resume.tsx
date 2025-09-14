@@ -545,62 +545,43 @@ export default function Resume() {
             <section id="community" className="mb-5 scroll-mt-24">
               <h3 className="text-base font-bold text-gray-900 mb-4 uppercase tracking-wide" style={{ letterSpacing: '0.05em' }}>Community Leadership</h3>
               
-              <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm hover:shadow-md transition-shadow">
-                <div className="flex gap-3">
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-white rounded-lg shadow-sm flex items-center justify-center border border-red-200">
-                      <img src={unitedWayLogo} alt="United Way" className="w-7 h-7 object-contain" />
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex justify-between items-start mb-3">
-                      <div>
-                        <h4 className="text-sm font-bold text-gray-900">Next Gen Ambassador</h4>
-                        <p className="text-sm text-blue-600 font-semibold">United Way • Kingston, ON</p>
-                      </div>
-                      <span className="text-xs text-gray-600 px-1.5 py-0.5 rounded">2020-2023</span>
-                    </div>
-                    <ul className="space-y-2">
-                      <li className="text-sm text-gray-700 flex items-start">
-                        <span className="text-blue-500 mr-2">•</span>
-                        <span>Led fundraising strategies, achieving 20% increase in funds raised over three years</span>
-                      </li>
-                      <li className="text-sm text-gray-700 flex items-start">
-                        <span className="text-blue-500 mr-2">•</span>
-                        <span>Spearheaded engagement initiatives, resulting in 15% rise in workplace participation</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              {/* Additional Community - Two Cards */}
-              <div className="mt-3 grid grid-cols-2 gap-3">
-                <div className="bg-white rounded-lg p-3 border border-gray-200 hover:shadow-sm transition-shadow">
-                  <div className="flex items-start gap-2">
+              <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
+                <div className="grid grid-cols-2 gap-6">
+                  {/* United Way */}
+                  <div className="flex items-start gap-3">
                     <div className="flex-shrink-0">
-                      <div className="w-7 h-7 bg-white rounded flex items-center justify-center border border-gray-200">
-                        <img src={rbcLogo} alt="RBC" className="w-5 h-5 object-contain" />
+                      <div className="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center border border-red-200">
+                        <img src={unitedWayLogo} alt="United Way" className="w-6 h-6 object-contain" />
                       </div>
                     </div>
                     <div className="flex-1">
-                      <h5 className="text-sm font-bold text-gray-900">Student Ambassador</h5>
-                      <p className="text-sm text-gray-600">Royal Bank of Canada • 2019-2020</p>
-                      <p className="text-sm text-gray-700 mt-1">Increased student engagement by 25% through campus events</p>
+                      <div className="flex justify-between items-start mb-1">
+                        <div>
+                          <h4 className="text-sm font-bold text-gray-900">Next Gen Ambassador</h4>
+                          <p className="text-sm text-blue-600 font-medium">United Way</p>
+                        </div>
+                        <span className="text-sm text-gray-600">2020-2023</span>
+                      </div>
+                      <p className="text-sm text-gray-700">Led fundraising strategies & engagement initiatives</p>
                     </div>
                   </div>
-                </div>
-                <div className="bg-white rounded-lg p-3 border border-gray-200 hover:shadow-sm transition-shadow">
-                  <div className="flex items-start gap-2">
+                  
+                  {/* RBC */}
+                  <div className="flex items-start gap-3">
                     <div className="flex-shrink-0">
-                      <div className="w-7 h-7 bg-white rounded flex items-center justify-center border border-gray-200">
-                        <img src={irvingLogo} alt="Irving" className="w-5 h-5 object-contain" />
+                      <div className="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center border border-blue-200">
+                        <img src={rbcLogo} alt="RBC" className="w-6 h-6 object-contain" />
                       </div>
                     </div>
                     <div className="flex-1">
-                      <h5 className="text-sm font-bold text-gray-900">Volunteer Staff</h5>
-                      <p className="text-sm text-gray-600">Irving Oil Limited • 2018</p>
-                      <p className="text-sm text-gray-700 mt-1">Organized engaging activities for 100+ children at community events</p>
+                      <div className="flex justify-between items-start mb-1">
+                        <div>
+                          <h4 className="text-sm font-bold text-gray-900">Student Ambassador</h4>
+                          <p className="text-sm text-blue-600 font-medium">Royal Bank of Canada</p>
+                        </div>
+                        <span className="text-sm text-gray-600">2019-2020</span>
+                      </div>
+                      <p className="text-sm text-gray-700">Increased student engagement by 25% through campus events</p>
                     </div>
                   </div>
                 </div>
