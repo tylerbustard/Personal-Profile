@@ -77,37 +77,47 @@ export default function Resume() {
             <Button
                 onClick={async () => {
                   try {
-                    // First get the resume metadata to get the custom filename
-                    const metadataResponse = await fetch('/api/resumes/employer');
-                    const resumes = await metadataResponse.json();
+                    // Check if we're on mobile device
+                    const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
                     
-                    let customFilename = 'Tyler_Bustard_Resume.pdf'; // fallback
-                    
-                    if (resumes && resumes.length > 0) {
-                      // Find the active resume or the most recent one
-                      const activeResume = resumes.find((r: any) => r.isActive) || resumes[0];
-                      if (activeResume && activeResume.fileName) {
-                        customFilename = activeResume.fileName.endsWith('.pdf') 
-                          ? activeResume.fileName 
-                          : `${activeResume.fileName}.pdf`;
-                      }
-                    }
-                    
-                    // Now download the PDF with the custom filename
-                    const response = await fetch('/api/resumes/latest/employer');
-                    if (response.ok) {
-                      const blob = await response.blob();
-                      const url = window.URL.createObjectURL(blob);
-                      const link = document.createElement('a');
-                      link.href = url;
-                      link.download = customFilename; // Use custom filename for download
-                      document.body.appendChild(link);
-                      link.click();
-                      document.body.removeChild(link);
-                      window.URL.revokeObjectURL(url);
+                    if (isMobile) {
+                      // For mobile devices, open PDF directly in new window/tab
+                      // This bypasses mobile download restrictions
+                      window.open('/api/resumes/latest/employer', '_blank');
                     } else {
-                      // Handle error - no PDF found
-                      alert('No resume PDF found. Please upload one via the employer dashboard.');
+                      // For desktop, use the blob download approach with custom filename
+                      // First get the resume metadata to get the custom filename
+                      const metadataResponse = await fetch('/api/resumes/employer');
+                      const resumes = await metadataResponse.json();
+                      
+                      let customFilename = 'Tyler_Bustard_Resume.pdf'; // fallback
+                      
+                      if (resumes && resumes.length > 0) {
+                        // Find the active resume or the most recent one
+                        const activeResume = resumes.find((r: any) => r.isActive) || resumes[0];
+                        if (activeResume && activeResume.fileName) {
+                          customFilename = activeResume.fileName.endsWith('.pdf') 
+                            ? activeResume.fileName 
+                            : `${activeResume.fileName}.pdf`;
+                        }
+                      }
+                      
+                      // Now download the PDF with the custom filename
+                      const response = await fetch('/api/resumes/latest/employer');
+                      if (response.ok) {
+                        const blob = await response.blob();
+                        const url = window.URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.download = customFilename; // Use custom filename for download
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        window.URL.revokeObjectURL(url);
+                      } else {
+                        // Handle error - no PDF found
+                        alert('No resume PDF found. Please upload one via the employer dashboard.');
+                      }
                     }
                   } catch (error) {
                     console.error('Error loading PDF:', error);
