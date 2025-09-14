@@ -545,9 +545,9 @@ export default function Resume() {
             <section id="community" className="mb-5 scroll-mt-24">
               <h3 className="text-base font-bold text-gray-900 mb-4 uppercase tracking-wide" style={{ letterSpacing: '0.05em' }}>Community Leadership</h3>
               
-              <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
-                <div className="grid grid-cols-2 gap-6">
-                  {/* United Way */}
+              <div className="grid grid-cols-2 gap-4">
+                {/* United Way */}
+                <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
                   <div className="flex items-start gap-3">
                     <div className="flex-shrink-0">
                       <div className="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center border border-red-200">
@@ -565,8 +565,10 @@ export default function Resume() {
                       <p className="text-sm text-gray-700">Led fundraising strategies & engagement initiatives</p>
                     </div>
                   </div>
-                  
-                  {/* RBC */}
+                </div>
+                
+                {/* RBC */}
+                <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
                   <div className="flex items-start gap-3">
                     <div className="flex-shrink-0">
                       <div className="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center border border-blue-200">
