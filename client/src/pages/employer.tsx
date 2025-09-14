@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/useAuth";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -28,7 +30,8 @@ interface ResumeUpload {
   description?: string;
 }
 
-function EmployerDashboard({ user }: { user: { email: string } }) {
+function EmployerDashboard() {
+  const { user } = useAuth();
   const { toast } = useToast();
   const [selectedVideo, setSelectedVideo] = useState<File | null>(null);
   const [selectedPdf, setSelectedPdf] = useState<File | null>(null);
@@ -59,7 +62,7 @@ function EmployerDashboard({ user }: { user: { email: string } }) {
       const formData = new FormData();
       formData.append('video', file);
       formData.append('title', title);
-      formData.append('uploadedBy', user.email);
+      formData.append('uploadedBy', (user as any)?.email || 'unknown');
       
       const response = await fetch('/api/videos/upload', {
         method: 'POST',
@@ -315,8 +318,7 @@ function EmployerDashboard({ user }: { user: { email: string } }) {
           <Button 
             variant="ghost" 
             onClick={() => {
-              localStorage.removeItem('employerAuth');
-              window.location.href = '/';
+              window.location.href = '/api/logout';
             }}
             data-testid="button-logout"
             className="text-gray-600 hover:text-gray-900 font-medium"
@@ -893,159 +895,11 @@ function EmployerDashboard({ user }: { user: { email: string } }) {
   );
 }
 
-function EmployerLogin({ onLogin }: { onLogin: (user: { email: string }) => void }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast();
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-
-    // Check credentials
-    if (email === 'tylerbustard' && password === 'Mvn7c7bb!!') {
-      localStorage.setItem('employerAuth', JSON.stringify({ email }));
-      onLogin({ email });
-      toast({
-        title: "Login Successful",
-        description: "Welcome to the employer dashboard!",
-      });
-    } else {
-      toast({
-        title: "Login Failed",
-        description: "Invalid email or password. Please try again.",
-        variant: "destructive",
-      });
-    }
-    setIsLoading(false);
-  };
-
-  return (
-    <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: '#f5f5f7' }}>
-      {/* Back Button */}
-      <Button 
-        variant="ghost" 
-        onClick={() => {
-          if (window.history.length > 1) {
-            window.history.back();
-          } else {
-            window.location.href = '/';
-          }
-        }}
-        className="fixed top-6 left-6 text-gray-600 hover:text-gray-900 font-medium z-10"
-        data-testid="button-back"
-        style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}
-      >
-        <ArrowLeft className="w-4 h-4 mr-2" />
-        Back
-      </Button>
-      
-      <Card className="w-full max-w-md bg-white/95 backdrop-blur-xl border border-white/40 shadow-xl">
-        <CardHeader className="text-center space-y-2">
-          <CardTitle className="text-2xl font-semibold text-gray-900" style={{ 
-            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif',
-            letterSpacing: '-0.025em'
-          }}>
-            Media Upload Access
-          </CardTitle>
-          <CardDescription className="text-gray-600" style={{ 
-            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' 
-          }}>
-            Sign in to upload and manage videos and resume PDFs
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-gray-700 font-medium">Username</Label>
-              <Input
-                id="email"
-                type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your username"
-                required
-                data-testid="input-email"
-                className="bg-white border-gray-200 focus:border-blue-500"
-                style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}
-              />
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="password" className="text-gray-700 font-medium">Password</Label>
-              <div className="relative">
-                <Input
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your password"
-                  required
-                  data-testid="input-password"
-                  className="bg-white border-gray-200 focus:border-blue-500 pr-10"
-                  style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                  data-testid="button-toggle-password"
-                >
-                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                </button>
-              </div>
-            </div>
-            
-            <Button 
-              type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl py-2.5 transition-all duration-200 hover:scale-105"
-              disabled={isLoading}
-              data-testid="button-login"
-              style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}
-            >
-              {isLoading ? "Signing In..." : "Sign In"}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
-    </div>
-  );
-}
 
 export default function EmployerPage() {
-  const [user, setUser] = useState<{ email: string } | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Check for existing auth on component mount
-    const authData = localStorage.getItem('employerAuth');
-    if (authData) {
-      try {
-        const userData = JSON.parse(authData);
-        setUser(userData);
-      } catch (error) {
-        localStorage.removeItem('employerAuth');
-      }
-    }
-    setIsLoading(false);
-  }, []);
-
-  const handleLogin = (userData: { email: string }) => {
-    setUser(userData);
-  };
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#f5f5f7' }}>
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-slate-900 dark:border-slate-50 mx-auto mb-4"></div>
-          <p className="text-slate-600 dark:text-slate-400">Loading...</p>
-        </div>
-      </div>
-    );
-  }
-
-  return user ? <EmployerDashboard user={user} /> : <EmployerLogin onLogin={handleLogin} />;
+  return (
+    <ProtectedRoute>
+      <EmployerDashboard />
+    </ProtectedRoute>
+  );
 }
