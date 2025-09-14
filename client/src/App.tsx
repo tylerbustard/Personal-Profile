@@ -9,6 +9,10 @@ import Resume from "@/pages/resume";
 import UploadResume from "@/pages/upload-resume";
 import ResumeUploadSignIn from "@/pages/resume-upload-signin";
 import UploadResumeDashboard from "@/pages/upload-resume-dashboard";
+import ResumeVariation1 from "@/pages/resume-variation-1";
+import ResumeVariation2 from "@/pages/resume-variation-2";
+import ResumeVariation3 from "@/pages/resume-variation-3";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { useGlobalAnimations } from "@/hooks/useGlobalAnimations";
 
 function Router() {
@@ -19,6 +23,21 @@ function Router() {
       <Route path="/employer" component={EmployerPage} />
       <Route path="/upload-resume" component={UploadResumeDashboard} />
       <Route path="/resume-upload-signin" component={ResumeUploadSignIn} />
+      <Route path="/resume-tech">
+        <ProtectedRoute>
+          <ResumeVariation1 />
+        </ProtectedRoute>
+      </Route>
+      <Route path="/resume-finance">
+        <ProtectedRoute>
+          <ResumeVariation2 />
+        </ProtectedRoute>
+      </Route>
+      <Route path="/resume-leadership">
+        <ProtectedRoute>
+          <ResumeVariation3 />
+        </ProtectedRoute>
+      </Route>
       <Route>404: Page not found</Route>
     </Switch>
   );
