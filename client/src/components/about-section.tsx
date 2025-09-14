@@ -68,7 +68,7 @@ export default function EducationSection() {
     { 
       category: "Academic Excellence", 
       items: [
-        { title: "Finance Specialization", desc: "Bachelor of Business Administration with Finance Major focus" },
+        { title: "Finance Specialization", desc: "Bachelor of Business Administration, Finance Major" },
         { title: "5 Academic Awards", desc: "$47,500 in scholarships and alumni awards for merit and leadership" },
         { title: "Accredited Co-op Program", desc: "Professional work experience integrated with academic curriculum" }
       ],
