@@ -353,6 +353,73 @@ function EmployerDashboard({ user }: { user: { email: string } }) {
           </div>
         </div>
 
+        {/* Private Resume Variations Section */}
+        <div className="mb-12">
+          <div className="bg-white/90 backdrop-blur-xl rounded-[2rem] border border-white/30 p-8 shadow-2xl hover:shadow-3xl transition-all duration-500"
+               style={{
+                 backdropFilter: 'blur(20px)',
+                 WebkitBackdropFilter: 'blur(20px)',
+                 boxShadow: '0 20px 80px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+               }}>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-3 bg-gradient-to-br from-green-50 to-green-100 rounded-2xl shadow-lg">
+                <FileText className="w-7 h-7 text-green-600" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-semibold text-gray-900" style={{ 
+                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif',
+                  letterSpacing: '-0.025em'
+                }}>
+                  Private Resume Variations
+                </h2>
+                <p className="text-sm text-gray-600" style={{ 
+                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' 
+                }}>
+                  Access specialized resume versions for different opportunities
+                </p>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <Button
+                onClick={() => window.open('/resume-tech', '_blank')}
+                className="h-auto p-4 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200"
+                variant="outline"
+                data-testid="button-resume-tech"
+              >
+                <div className="text-left w-full">
+                  <div className="font-semibold text-sm mb-1">Technology Focus</div>
+                  <div className="text-xs text-blue-600">AI, Programming & Fintech</div>
+                </div>
+              </Button>
+              
+              <Button
+                onClick={() => window.open('/resume-finance', '_blank')}
+                className="h-auto p-4 bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200"
+                variant="outline"
+                data-testid="button-resume-finance"
+              >
+                <div className="text-left w-full">
+                  <div className="font-semibold text-sm mb-1">Traditional Finance</div>
+                  <div className="text-xs text-purple-600">Wealth Management & Investment</div>
+                </div>
+              </Button>
+              
+              <Button
+                onClick={() => window.open('/resume-leadership', '_blank')}
+                className="h-auto p-4 bg-orange-50 hover:bg-orange-100 text-orange-700 border border-orange-200 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200"
+                variant="outline"
+                data-testid="button-resume-leadership"
+              >
+                <div className="text-left w-full">
+                  <div className="font-semibold text-sm mb-1">Leadership Focus</div>
+                  <div className="text-xs text-orange-600">Team Management & Strategy</div>
+                </div>
+              </Button>
+            </div>
+          </div>
+        </div>
+
         {/* Main Content Grid - Videos Left, PDFs Right */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* LEFT COLUMN - Video Section */}
