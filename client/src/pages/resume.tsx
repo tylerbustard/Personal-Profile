@@ -83,7 +83,7 @@ export default function Resume() {
                     if (isMobile) {
                       // For mobile devices, open PDF directly in new window/tab
                       // This bypasses mobile download restrictions
-                      window.open('/Tyler_Bustard_Resume.pdf', '_blank');
+                      window.open('/api/resumes/latest/employer', '_blank');
                     } else {
                       // For desktop, use the blob download approach with custom filename
                       // First get the resume metadata to get the custom filename
@@ -103,7 +103,7 @@ export default function Resume() {
                       }
                       
                       // Now download the PDF with the custom filename
-                      const response = await fetch('/Tyler_Bustard_Resume.pdf');
+                      const response = await fetch('/api/resumes/latest/employer');
                       if (response.ok) {
                         const blob = await response.blob();
                         const url = window.URL.createObjectURL(blob);

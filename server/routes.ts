@@ -179,50 +179,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ error: "Failed to delete resume" });
     }
   });
-  // Serve Tyler Bustard Resume files (must be before API routes)
-  app.get("/Tyler_Bustard_Resume.pdf", async (req, res) => {
-    try {
-      // FIRST: Check database for uploaded resumes (prioritize uploaded files)
-      const resumes = await storage.getResumeUploads('employer');
-      
-      if (resumes.length > 0) {
-        // Get the most recent PDF resume from uploads
-        const pdfResume = resumes
-          .filter(r => r.fileName.toLowerCase().endsWith('.pdf'))
-          .sort((a, b) => {
-            const dateA = a.uploadedAt ? new Date(a.uploadedAt).getTime() : 0;
-            const dateB = b.uploadedAt ? new Date(b.uploadedAt).getTime() : 0;
-            return dateB - dateA;
-          })[0];
-
-        if (pdfResume && pdfResume.fileUrl) {
-          const resumePath = path.join(process.cwd(), pdfResume.fileUrl.replace(/^\//, ''));
-          
-          if (fs.existsSync(resumePath)) {
-            res.setHeader('Content-Type', 'application/pdf');
-            res.setHeader('Content-Disposition', `attachment; filename="Tyler_Bustard_Resume.pdf"`);
-            const fileStream = fs.createReadStream(resumePath);
-            return fileStream.pipe(res);
-          }
-        }
-      }
-
-      // FALLBACK: Only serve from attached assets if no uploads found
-      const fallbackPath = path.join(process.cwd(), 'attached_assets/Tyler_Bustard_Resume.pdf');
-      
-      if (fs.existsSync(fallbackPath)) {
-        res.setHeader('Content-Type', 'application/pdf');
-        res.setHeader('Content-Disposition', `attachment; filename="Tyler_Bustard_Resume.pdf"`);
-        const fileStream = fs.createReadStream(fallbackPath);
-        return fileStream.pipe(res);
-      }
-
-      return res.status(404).json({ error: "No resume found" });
-    } catch (error) {
-      console.error("Error serving Tyler Bustard resume:", error);
-      res.status(500).json({ error: "Internal server error" });
-    }
-  });
 
   // SQL Translation endpoint
   app.post("/api/translate-sql", async (req, res) => {
