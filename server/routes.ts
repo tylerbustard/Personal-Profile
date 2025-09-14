@@ -262,13 +262,14 @@ Focus on investment analysis, portfolio management, and financial reporting quer
   });
 
   // Resume upload endpoint (works exactly like video upload)
-  app.post("/api/resumes/upload", resumeUpload.single('resume'), async (req, res) => {
+  app.post("/api/resumes/upload", isAuthenticated, resumeUpload.single('resume'), async (req, res) => {
     try {
       if (!req.file) {
         return res.status(400).json({ error: "No resume file provided" });
       }
 
-      const { userId = 'employer', title } = req.body;
+      const userId = (req as any).user.claims.sub; // Use authenticated user ID
+      const { title } = req.body;
       
       // Create resume record in storage - just like videos
       const resume = await storage.createResumeUpload({
@@ -433,7 +434,7 @@ Focus on investment analysis, portfolio management, and financial reporting quer
 
 
   // Video upload endpoint
-  app.post("/api/videos/upload", videoUpload.single('video'), async (req, res) => {
+  app.post("/api/videos/upload", isAuthenticated, videoUpload.single('video'), async (req, res) => {
     try {
       if (!req.file) {
         return res.status(400).json({ error: "No video file provided" });
@@ -447,7 +448,7 @@ Focus on investment analysis, portfolio management, and financial reporting quer
         mimeType: req.file.mimetype,
         fileSize: req.file.size,
         isActive: true, // Set new video as active by default
-        uploadedBy: "admin" // Admin upload from employer dashboard
+        uploadedBy: (req as any).user.claims.email || "authenticated-user" // Use authenticated user's email
       });
 
       // Mark all other videos as inactive
