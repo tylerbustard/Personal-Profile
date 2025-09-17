@@ -66,7 +66,7 @@ export default function CertificationsSection() {
 
   const certificationCategories: CertificationCategory[] = [
     {
-      title: "Financial Excellence",
+      title: "Financial Certifications",
       icon: FaChartLine,
       color: "bg-blue-500",
       certifications: [
@@ -83,7 +83,7 @@ export default function CertificationsSection() {
       ]
     },
     {
-      title: "Data & Technology",
+      title: "Data Science & Technology Certifications",
       icon: SiGoogle,
       color: "bg-emerald-500",
       certifications: [
@@ -96,7 +96,7 @@ export default function CertificationsSection() {
       ]
     },
     {
-      title: "Advanced Analytics",
+      title: "Mathematical & Statistical Certifications",
       icon: FaCalculator,
       color: "bg-purple-500",
       certifications: [
@@ -135,25 +135,26 @@ export default function CertificationsSection() {
     <section 
       ref={sectionAnimation.ref}
       id="certifications" 
-      className="py-16 sm:py-24 lg:py-32 relative overflow-hidden"
+      className="py-20 sm:py-28 lg:py-36 relative overflow-hidden"
       style={{ opacity: 1, visibility: 'visible' }}
     >
       {/* Background - inherits Apple grey from parent */}
       
       <div className="container-width">
-        <div className="bg-white/90 backdrop-blur-xl rounded-[28px] p-6 sm:p-8 lg:p-12 border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-500">
-          {/* Header */}
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-            <h2 className="text-5xl lg:text-6xl font-bold text-foreground mb-6 tracking-tight">
-              Certifications
-            </h2>
-            <p className="text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Certifications in finance, technology, and banking
-            </p>
-          </div>
+        {/* Header - Outside the card */}
+        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+          <h2 className="text-5xl lg:text-6xl font-bold text-foreground mb-6 tracking-tight" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>
+            Certifications
+          </h2>
+          <p className="text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
+            Certifications in finance, technology, and banking
+          </p>
+        </div>
+
+        <div className="bg-white/90 backdrop-blur-xl rounded-[28px] p-8 sm:p-10 lg:p-12 border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-500">
 
         {/* All Certifications */}
-        <div ref={certificationsRef} className="space-y-6 sm:space-y-8 mb-12 sm:mb-16 lg:mb-20 certifications-container">
+        <div ref={certificationsRef} className="space-y-8 sm:space-y-10 mb-12 sm:mb-16 lg:mb-20 certifications-container">
             {certificationCategories.map((category, categoryIndex) => (
               <div 
                 key={categoryIndex} 
@@ -166,16 +167,11 @@ export default function CertificationsSection() {
                   <div className="flex flex-col lg:flex-row lg:items-center gap-8">
                     {/* Category Title */}
                     <div className="lg:w-1/4 text-center sm:text-left">
-                      <div className="flex items-center justify-center sm:justify-start gap-4 mb-6">
-                        <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
-                          <category.icon className="w-8 h-8 text-white" />
-                        </div>
-                      </div>
-                      <h4 className="text-xl sm:text-2xl font-bold text-foreground mb-3">
+                      <h4 className="text-xl sm:text-2xl font-bold text-foreground mb-3" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>
                         {category.title}
                       </h4>
                       <div className="w-12 h-1 bg-gradient-to-r from-primary to-blue-500 rounded-full mx-auto sm:mx-0 mb-3" />
-                      <p className="text-base text-muted-foreground">{category.certifications.length} professional certifications</p>
+                      <p className="text-base text-muted-foreground" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>{category.certifications.length} professional certifications</p>
                     </div>
 
                     {/* Certification Items */}
@@ -189,10 +185,10 @@ export default function CertificationsSection() {
                         >
                           {/* Header with title and year */}
                           <div className="flex items-start justify-between mb-4">
-                            <h5 className="font-bold text-foreground text-lg flex-1 leading-tight pr-3">
+                            <h5 className="font-bold text-foreground text-lg flex-1 leading-tight pr-3" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
                               {cert.name}
                             </h5>
-                            <span className="text-sm font-semibold text-gray-600 bg-gray-100 px-3 py-1 rounded-full flex-shrink-0">{cert.year}</span>
+                            <span className="text-sm font-semibold text-gray-600 bg-gray-100 px-3 py-1 rounded-full flex-shrink-0" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>{cert.year}</span>
                           </div>
                           
                           {/* Institution with logo */}
@@ -204,12 +200,12 @@ export default function CertificationsSection() {
                                 className="w-6 h-6 object-contain flex-shrink-0"
                               />
                             )}
-                            <p className="text-muted-foreground font-semibold text-base">{cert.institution}</p>
+                            <p className="text-muted-foreground font-semibold text-base" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>{cert.institution}</p>
                           </div>
                           
                           {/* Description */}
                           <div className="flex-1 mb-4">
-                            <p className="text-muted-foreground text-sm leading-relaxed">{cert.description}</p>
+                            <p className="text-muted-foreground text-sm leading-relaxed" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>{cert.description}</p>
                           </div>
                           
                           {/* Footer badges */}
@@ -231,7 +227,7 @@ export default function CertificationsSection() {
 
         {/* Achievement Metrics - Clean stats */}
         <div className="bg-white/90 backdrop-blur-xl rounded-[28px] border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-500 overflow-hidden">
-          <div className="bg-gradient-to-r from-gray-100/50 to-gray-200/50 p-6 sm:p-8 lg:p-12">
+          <div className="bg-gradient-to-r from-gray-100/50 to-gray-200/50 p-8 sm:p-10 lg:p-12">
             <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-6 sm:mb-8 text-center">
               Professional Development Highlights
             </h3>
@@ -356,16 +352,17 @@ export function CommunitySection() {
       {/* Background - inherits Apple grey from parent */}
       
       <div className="container-width">
-        <div className="bg-white/90 backdrop-blur-xl rounded-[28px] p-6 sm:p-8 lg:p-12 border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-500">
-          {/* Header */}
-          <div className="text-center mb-8 sm:mb-10 lg:mb-12">
-            <h2 className="text-5xl lg:text-6xl font-bold text-foreground mb-6 tracking-tight">
-              Community
-            </h2>
-            <p className="text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Community leadership and volunteer service initiatives
-            </p>
-          </div>
+        {/* Header - Outside the card */}
+        <div className="text-center mb-8 sm:mb-10 lg:mb-12">
+          <h2 className="text-5xl lg:text-6xl font-bold text-foreground mb-6 tracking-tight">
+            Community
+          </h2>
+          <p className="text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Community leadership and volunteer service initiatives
+          </p>
+        </div>
+
+        <div className="bg-white/90 backdrop-blur-xl rounded-[28px] p-8 sm:p-10 lg:p-12 border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-500">
 
         {/* Community Activities Timeline */}
         <div ref={communityRef} className="relative">
@@ -477,7 +474,7 @@ export function CommunitySection() {
         {/* Community Impact Summary */}
         <div className="mt-16 sm:mt-20 lg:mt-24">
           <div className="bg-white/90 backdrop-blur-xl rounded-[28px] border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-500 overflow-hidden">
-            <div className="bg-gradient-to-r from-gray-100/50 to-gray-200/50 p-6 sm:p-8 lg:p-12">
+            <div className="bg-gradient-to-r from-gray-100/50 to-gray-200/50 p-8 sm:p-10 lg:p-12">
               <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-8 sm:mb-12 text-center">
                 Community Highlights
               </h3>

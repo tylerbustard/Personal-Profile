@@ -95,6 +95,46 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Setup authentication
   await setupAuth(app);
 
+  // Simple auth routes
+  app.post('/api/auth/login', async (req, res) => {
+    try {
+      const { username, password } = req.body;
+      
+      // Simple hardcoded credentials for now
+      if (username === 'tylerbustard' && password === 'Mvn7c7bb!!') {
+        const user = {
+          id: 'tylerbustard',
+          username: 'tylerbustard',
+          email: 'tyler@tylerbustard.ca'
+        };
+        
+        // Set up server session for authentication
+        (req as any).user = { claims: { sub: 'tylerbustard' } };
+        
+        // Store user in session
+        (req as any).session = (req as any).session || {};
+        (req as any).session.user = user;
+        
+        res.json({ 
+          success: true, 
+          user,
+          message: 'Login successful' 
+        });
+      } else {
+        res.status(401).json({ 
+          success: false, 
+          error: 'Invalid username or password'
+        });
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      res.status(500).json({ 
+        success: false, 
+        error: 'Internal server error'
+      });
+    }
+  });
+
   // Auth routes
   app.get('/api/auth/user', isAuthenticated, async (req: any, res) => {
     try {
@@ -268,7 +308,7 @@ Focus on investment analysis, portfolio management, and financial reporting quer
         return res.status(400).json({ error: "No resume file provided" });
       }
 
-      const userId = (req as any).user.claims.sub; // Use authenticated user ID
+      const userId = 'employer'; // Use consistent user ID
       const { title } = req.body;
       
       // Create resume record in storage - just like videos
@@ -382,12 +422,13 @@ Focus on investment analysis, portfolio management, and financial reporting quer
   });
 
   // Delete resume endpoint (works like videos)
-  app.delete("/api/resumes/:resumeId", async (req, res) => {
+  app.delete("/api/resumes/:resumeId", isAuthenticated, async (req, res) => {
     try {
       const { resumeId } = req.params;
       
       // Get the resume first to get the file path
-      const resumes = await storage.getResumeUploads('employer');
+      const userId = 'employer'; // Use consistent user ID
+      const resumes = await storage.getResumeUploads(userId);
       const resumeToDelete = resumes.find(r => r.id === resumeId);
       
       if (!resumeToDelete) {
@@ -414,10 +455,10 @@ Focus on investment analysis, portfolio management, and financial reporting quer
   });
 
   // Set active resume endpoint
-  app.post("/api/resumes/:resumeId/activate", async (req, res) => {
+  app.post("/api/resumes/:resumeId/activate", isAuthenticated, async (req, res) => {
     try {
       const { resumeId } = req.params;
-      const userId = 'employer';
+      const userId = 'employer'; // Use consistent user ID
       
       // Deactivate all other resumes first
       await storage.deactivateOtherResumes(resumeId, userId);

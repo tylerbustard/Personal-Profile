@@ -20,7 +20,11 @@ import wallStreetPrepLogo from "@assets/wall street prep_1755923720193.png";
 import courseraLogo from "@assets/Coursera_1755937682843.png";
 import mcgillLogo from "@assets/mcgill_1755937693386.png";
 
-export default function ResumeVariation3() {
+interface ResumeVariation3Props {
+  variation?: 'universityoftoronto' | 'queensuniversity' | 'profile' | null;
+}
+
+export default function ResumeVariation3({ variation = null }: ResumeVariation3Props = {}) {
   const isPageLoaded = useInitialPageAnimation(400);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
 
@@ -99,7 +103,7 @@ export default function ResumeVariation3() {
                   <div id="contact" className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-600 mt-4 scroll-mt-24">
                     <div className="flex items-center gap-1.5">
                       <Mail className="w-3.5 h-3.5 text-blue-500" />
-                      <span>tbustard@unb.ca</span>
+                      <span>tylerbustard@hotmail.com</span>
                     </div>
                     <div className="flex items-center gap-1.5">
                       <Phone className="w-3.5 h-3.5 text-blue-500" />

@@ -83,12 +83,12 @@ app.use((req, res, next) => {
       try {
         const { storage } = await import('./storage');
         await storage.upsertUser({
-          id: 'employer',
-          email: 'employer@tylerbustard.ca',
-          firstName: 'Admin',
-          lastName: 'User',
+          id: 'tylerbustard',
+          email: 'tyler@tylerbustard.ca',
+          firstName: 'Tyler',
+          lastName: 'Bustard',
         });
-        log('Employer user ready for PDF uploads');
+        log('Tyler Bustard user ready for PDF uploads');
       } catch (error) {
         log('Note: Employer user initialization - ' + error, 'error');
       }
@@ -99,11 +99,9 @@ app.use((req, res, next) => {
       log('Database initialization failed, but server will continue: ' + error, 'error');
     });
 
-    // ALWAYS serve the app on the port specified in the environment variable PORT
-    // Other ports are firewalled. Default to 5000 if not specified.
-    // this serves both the API and the client.
-    // It is the only port that is not firewalled.
+    // Serve the app on the configured port/host. Default to 5000 on localhost in dev.
     const port = parseInt(process.env.PORT || '5000', 10);
+    const host = process.env.HOST || (app.get('env') === 'development' ? '127.0.0.1' : '0.0.0.0');
     
     // Add error handling for server listen operation
     server.on('error', (error: any) => {
@@ -117,12 +115,14 @@ app.use((req, res, next) => {
       process.exit(1);
     });
 
-    server.listen({
-      port,
-      host: "0.0.0.0",
-      reusePort: true,
-    }, () => {
-      log(`serving on port ${port}`);
+    const listenOptions: any = { port, host };
+    // reusePort is not supported on some platforms (e.g., macOS). Only enable in production.
+    if (app.get('env') !== 'development') {
+      listenOptions.reusePort = true;
+    }
+
+    server.listen(listenOptions, () => {
+      log(`serving on http://${host}:${port}`);
     });
   
   } catch (error) {

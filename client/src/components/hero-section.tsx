@@ -41,7 +41,7 @@ export default function HeroSection() {
   };
   
   return (
-    <section id="hero" className="relative overflow-hidden min-h-screen flex items-center justify-center py-24 sm:py-32" style={{ backgroundColor: '#f5f5f7' }}>
+    <section id="hero" className="relative overflow-hidden min-h-screen flex items-center justify-center py-20 sm:py-28 lg:py-36" style={{ backgroundColor: '#f5f5f7' }}>
       <div className="relative z-10 px-4 sm:px-6 w-full">
         <div className="max-w-7xl mx-auto">
           
@@ -73,18 +73,18 @@ export default function HeroSection() {
                 {/* Name & Title */}
                 <div className="space-y-4 sm:space-y-6">
                   <div className="space-y-2 sm:space-y-3">
-                    <h1 className="text-4xl sm:text-5xl lg:text-7xl text-foreground tracking-tight leading-[0.9] apple-heading">
-                      <span className="font-bold bg-gradient-to-r from-gray-900 via-black to-gray-800 bg-clip-text text-transparent dark:from-white dark:via-gray-100 dark:to-gray-300">Tyler</span>{' '}
-                      <span className="font-normal bg-gradient-to-r from-gray-900 via-black to-gray-800 bg-clip-text text-transparent dark:from-white dark:via-gray-100 dark:to-gray-300">Bustard</span>
+                    <h1 className="text-4xl sm:text-5xl lg:text-7xl text-gray-900 dark:text-white tracking-tight leading-[0.9]" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>
+                      <span className="font-bold">Tyler</span>{' '}
+                      <span className="font-normal">Bustard</span>
                     </h1>
                   </div>
-                  <p className="text-xl sm:text-2xl lg:text-3xl font-semibold text-primary">
+                  <p className="text-xl sm:text-2xl lg:text-3xl font-semibold text-primary" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
                     Finance & Technology Professional
                   </p>
                 </div>
 
                 {/* Description */}
-                <p className="text-base sm:text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                <p className="text-base sm:text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto lg:mx-0" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
                   Driving innovation at the intersection of finance and technology. 
                   Delivering exceptional results through analytical expertise, strategic thinking, and client-focused solutions.
                 </p>
@@ -197,6 +197,7 @@ export default function HeroSection() {
                       </div>
                       {videosQuery.data && 
                        Array.isArray(videosQuery.data) &&
+                       videosQuery.data.length > 0 &&
                        videosQuery.data.find((video: any) => video.isActive) ? 'Watch Introduction Video' : 'Introduction'}
                     </Button>
                   )}
@@ -211,20 +212,20 @@ export default function HeroSection() {
             {/* Education Card */}
             <div 
               onClick={() => scrollToSection('education')}
-              className={`bg-white/90 backdrop-blur-[20px] border border-white/20 rounded-2xl p-6 sm:p-8 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] page-load-fade-in cursor-pointer min-h-[200px] sm:min-h-[220px] flex flex-col justify-between ${isPageLoaded ? 'loaded' : ''}`}
+              className={`group bg-white/90 backdrop-blur-[20px] border border-white/20 rounded-2xl p-6 sm:p-8 shadow-2xl hover:shadow-3xl hover:shadow-blue-500/20 transition-all duration-500 hover:scale-[1.05] hover:-translate-y-2 page-load-fade-in cursor-pointer min-h-[200px] sm:min-h-[220px] flex flex-col justify-between hover:bg-gradient-to-br hover:from-white/95 hover:to-blue-50/80 ${isPageLoaded ? 'loaded' : ''}`}
                  style={{
                    backdropFilter: 'blur(20px)',
                    WebkitBackdropFilter: 'blur(20px)',
                    animationDelay: '0.5s'
                  }}
                  data-testid="card-education">
-              <div className="flex items-center gap-3 mb-1">
-                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center relative">
-                  <img src={unbLogo} alt="University of New Brunswick Education" className="w-6 h-6 object-contain" />
+              <div className="flex items-center gap-4 mb-1">
+                <div className="w-12 h-12 bg-primary/10 group-hover:bg-blue-500/20 rounded-xl flex items-center justify-center relative transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
+                  <img src={unbLogo} alt="University of New Brunswick Education" className="w-6 h-6 object-contain transition-all duration-300 group-hover:scale-110" />
                 </div>
-                <h3 className="text-lg font-semibold text-foreground">Education</h3>
+                <h3 className="text-lg font-semibold text-foreground group-hover:text-blue-600 transition-colors duration-300">Education</h3>
               </div>
-              <p className="text-base text-muted-foreground leading-relaxed">
+              <p className="text-base text-muted-foreground group-hover:text-gray-700 leading-relaxed transition-colors duration-300">
                 Strategic business foundation with finance expertise
               </p>
             </div>
@@ -232,31 +233,31 @@ export default function HeroSection() {
             {/* Experience Card */}
             <div 
               onClick={() => scrollToSection('experience')}
-              className={`bg-white/90 backdrop-blur-[20px] border border-white/20 rounded-2xl p-6 sm:p-8 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] page-load-fade-in cursor-pointer min-h-[200px] sm:min-h-[220px] flex flex-col justify-between ${isPageLoaded ? 'loaded' : ''}`}
+              className={`group bg-white/90 backdrop-blur-[20px] border border-white/20 rounded-2xl p-6 sm:p-8 shadow-2xl hover:shadow-3xl hover:shadow-green-500/20 transition-all duration-500 hover:scale-[1.05] hover:-translate-y-2 page-load-fade-in cursor-pointer min-h-[200px] sm:min-h-[220px] flex flex-col justify-between hover:bg-gradient-to-br hover:from-white/95 hover:to-green-50/80 ${isPageLoaded ? 'loaded' : ''}`}
                  style={{
                    backdropFilter: 'blur(20px)',
                    WebkitBackdropFilter: 'blur(20px)',
                    animationDelay: '0.6s'
                  }}
                  data-testid="card-experience">
-              <div className="flex items-center gap-3 mb-1">
-                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center relative overflow-visible">
+              <div className="flex items-center gap-4 mb-1">
+                <div className="w-12 h-12 bg-primary/10 group-hover:bg-green-500/20 rounded-xl flex items-center justify-center relative overflow-visible transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
                   {/* Three most recent experience logos stacked */}
-                  <div className="flex relative">
-                    <div className="w-6 h-6 bg-white rounded-full border-2 border-white shadow-md flex items-center justify-center relative z-30">
+                  <div className="flex relative group-hover:space-x-1 transition-all duration-300">
+                    <div className="w-6 h-6 bg-white rounded-full border-2 border-white shadow-md flex items-center justify-center relative z-30 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg">
                       <img src={bmoLogo} alt="BMO Bank of Montreal Financial Services" className="w-4 h-4 object-contain" />
                     </div>
-                    <div className="w-6 h-6 bg-white rounded-full border-2 border-white shadow-md flex items-center justify-center relative z-20 -ml-2">
+                    <div className="w-6 h-6 bg-white rounded-full border-2 border-white shadow-md flex items-center justify-center relative z-20 -ml-2 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg">
                       <img src={tdLogo} alt="TD Bank Financial Services" className="w-4 h-4 object-contain" />
                     </div>
-                    <div className="w-6 h-6 bg-white rounded-full border-2 border-white shadow-md flex items-center justify-center relative z-10 -ml-2">
+                    <div className="w-6 h-6 bg-white rounded-full border-2 border-white shadow-md flex items-center justify-center relative z-10 -ml-2 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg">
                       <img src={rbcLogo} alt="Royal Bank of Canada" className="w-4 h-4 object-contain" />
                     </div>
                   </div>
                 </div>
-                <h3 className="text-lg font-semibold text-foreground">Experience</h3>
+                <h3 className="text-lg font-semibold text-foreground group-hover:text-green-600 transition-all duration-300 group-hover:translate-x-2">Experience</h3>
               </div>
-              <p className="text-base text-muted-foreground leading-relaxed">
+              <p className="text-base text-muted-foreground group-hover:text-gray-700 leading-relaxed transition-colors duration-300">
                 Professional experience in finance, banking and accounting
               </p>
             </div>
@@ -264,31 +265,31 @@ export default function HeroSection() {
             {/* Certifications Card */}
             <div 
               onClick={() => scrollToSection('certifications')}
-              className={`bg-white/90 backdrop-blur-[20px] border border-white/20 rounded-2xl p-6 sm:p-8 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] page-load-fade-in cursor-pointer min-h-[200px] sm:min-h-[220px] flex flex-col justify-between ${isPageLoaded ? 'loaded' : ''}`}
+              className={`group bg-white/90 backdrop-blur-[20px] border border-white/20 rounded-2xl p-6 sm:p-8 shadow-2xl hover:shadow-3xl hover:shadow-purple-500/20 transition-all duration-500 hover:scale-[1.05] hover:-translate-y-2 page-load-fade-in cursor-pointer min-h-[200px] sm:min-h-[220px] flex flex-col justify-between hover:bg-gradient-to-br hover:from-white/95 hover:to-purple-50/80 ${isPageLoaded ? 'loaded' : ''}`}
                  style={{
                    backdropFilter: 'blur(20px)',
                    WebkitBackdropFilter: 'blur(20px)',
                    animationDelay: '0.7s'
                  }}
                  data-testid="card-certifications">
-              <div className="flex items-center gap-3 mb-1">
-                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center relative overflow-visible">
+              <div className="flex items-center gap-4 mb-1">
+                <div className="w-12 h-12 bg-primary/10 group-hover:bg-purple-500/20 rounded-xl flex items-center justify-center relative overflow-visible transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
                   {/* Three most recent certification logos stacked */}
-                  <div className="flex relative">
-                    <div className="w-6 h-6 bg-white rounded-full border-2 border-white shadow-md flex items-center justify-center relative z-30">
+                  <div className="flex relative group-hover:space-x-1 transition-all duration-300">
+                    <div className="w-6 h-6 bg-white rounded-full border-2 border-white shadow-md flex items-center justify-center relative z-30 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg">
                       <img src={cfaLogo} alt="CFA Chartered Financial Analyst Institute" className="w-4 h-4 object-contain" />
                     </div>
-                    <div className="w-6 h-6 bg-white rounded-full border-2 border-white shadow-md flex items-center justify-center relative z-20 -ml-2">
+                    <div className="w-6 h-6 bg-white rounded-full border-2 border-white shadow-md flex items-center justify-center relative z-20 -ml-2 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg">
                       <img src={trainingTheStreetLogo} alt="Training the Street Financial Modeling Certification" className="w-4 h-4 object-contain" />
                     </div>
-                    <div className="w-6 h-6 bg-white rounded-full border-2 border-white shadow-md flex items-center justify-center relative z-10 -ml-2">
+                    <div className="w-6 h-6 bg-white rounded-full border-2 border-white shadow-md flex items-center justify-center relative z-10 -ml-2 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg">
                       <img src={etsLogo} alt="ETS Educational Testing Service Certification" className="w-4 h-4 object-contain" />
                     </div>
                   </div>
                 </div>
-                <h3 className="text-lg font-semibold text-foreground">Certifications</h3>
+                <h3 className="text-lg font-semibold text-foreground group-hover:text-purple-600 transition-all duration-300 group-hover:translate-x-2">Certifications</h3>
               </div>
-              <p className="text-base text-muted-foreground leading-relaxed">
+              <p className="text-base text-muted-foreground group-hover:text-gray-700 leading-relaxed transition-colors duration-300">
                 Certifications in finance, technology, and banking
               </p>
             </div>
@@ -296,31 +297,31 @@ export default function HeroSection() {
             {/* Community Card */}
             <div 
               onClick={() => scrollToSection('community')}
-              className={`bg-white/90 backdrop-blur-[20px] border border-white/20 rounded-2xl p-6 sm:p-8 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] page-load-fade-in cursor-pointer min-h-[200px] sm:min-h-[220px] flex flex-col justify-between ${isPageLoaded ? 'loaded' : ''}`}
+              className={`group bg-white/90 backdrop-blur-[20px] border border-white/20 rounded-2xl p-6 sm:p-8 shadow-2xl hover:shadow-3xl hover:shadow-orange-500/20 transition-all duration-500 hover:scale-[1.05] hover:-translate-y-2 page-load-fade-in cursor-pointer min-h-[200px] sm:min-h-[220px] flex flex-col justify-between hover:bg-gradient-to-br hover:from-white/95 hover:to-orange-50/80 ${isPageLoaded ? 'loaded' : ''}`}
                  style={{
                    backdropFilter: 'blur(20px)',
                    WebkitBackdropFilter: 'blur(20px)',
                    animationDelay: '0.8s'
                  }}
                  data-testid="card-community">
-              <div className="flex items-center gap-3 mb-1">
-                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center relative overflow-visible">
+              <div className="flex items-center gap-4 mb-1">
+                <div className="w-12 h-12 bg-primary/10 group-hover:bg-orange-500/20 rounded-xl flex items-center justify-center relative overflow-visible transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
                   {/* Three most recent community logos stacked */}
-                  <div className="flex relative">
-                    <div className="w-6 h-6 bg-white rounded-full border-2 border-white shadow-md flex items-center justify-center relative z-30">
+                  <div className="flex relative group-hover:space-x-1 transition-all duration-300">
+                    <div className="w-6 h-6 bg-white rounded-full border-2 border-white shadow-md flex items-center justify-center relative z-30 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg">
                       <img src={unitedWayLogo} alt="United Way Community Volunteer Organization" className="w-4 h-4 object-contain" />
                     </div>
-                    <div className="w-6 h-6 bg-white rounded-full border-2 border-white shadow-md flex items-center justify-center relative z-20 -ml-2">
+                    <div className="w-6 h-6 bg-white rounded-full border-2 border-white shadow-md flex items-center justify-center relative z-20 -ml-2 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg">
                       <img src={rbcLogo} alt="RBC Royal Bank of Canada" className="w-4 h-4 object-contain" />
                     </div>
-                    <div className="w-6 h-6 bg-white rounded-full border-2 border-white shadow-md flex items-center justify-center relative z-10 -ml-2">
+                    <div className="w-6 h-6 bg-white rounded-full border-2 border-white shadow-md flex items-center justify-center relative z-10 -ml-2 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg">
                       <img src={irvingLogo} alt="Irving Oil Energy Company" className="w-4 h-4 object-contain" />
                     </div>
                   </div>
                 </div>
-                <h3 className="text-lg font-semibold text-foreground">Community</h3>
+                <h3 className="text-lg font-semibold text-foreground group-hover:text-orange-600 transition-all duration-300 group-hover:translate-x-2">Community</h3>
               </div>
-              <p className="text-base text-muted-foreground leading-relaxed">
+              <p className="text-base text-muted-foreground group-hover:text-gray-700 leading-relaxed transition-colors duration-300">
                 Community leadership and volunteer service initiatives
               </p>
             </div>

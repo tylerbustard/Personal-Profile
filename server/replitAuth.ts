@@ -1,6 +1,5 @@
 import * as client from "openid-client";
 import { Strategy, type VerifyFunction } from "openid-client/passport";
-
 import passport from "passport";
 import session from "express-session";
 import type { Express, RequestHandler } from "express";
@@ -8,9 +7,7 @@ import memoize from "memoizee";
 import connectPg from "connect-pg-simple";
 import { storage } from "./storage";
 
-if (!process.env.REPLIT_DOMAINS) {
-  throw new Error("Environment variable REPLIT_DOMAINS not provided");
-}
+const useDevAuth = !process.env.REPLIT_DOMAINS || !process.env.DATABASE_URL || process.env.NODE_ENV === "development";
 
 const getOidcConfig = memoize(
   async () => {
@@ -24,6 +21,14 @@ const getOidcConfig = memoize(
 
 export function getSession() {
   const sessionTtl = 7 * 24 * 60 * 60 * 1000; // 1 week
+  if (useDevAuth) {
+    return session({
+      secret: process.env.SESSION_SECRET || 'dev-secret-key-' + Math.random().toString(36).slice(2),
+      resave: false,
+      saveUninitialized: false,
+      cookie: { httpOnly: true, secure: false, maxAge: sessionTtl },
+    });
+  }
   const pgStore = connectPg(session);
   const sessionStore = new pgStore({
     conString: process.env.DATABASE_URL,
@@ -32,15 +37,11 @@ export function getSession() {
     tableName: "sessions",
   });
   return session({
-    secret: process.env.SESSION_SECRET || 'dev-secret-key-for-testing-' + Math.random().toString(36).substring(2, 15),
+    secret: process.env.SESSION_SECRET || 'dev-secret-key-' + Math.random().toString(36).slice(2),
     store: sessionStore,
     resave: false,
     saveUninitialized: false,
-    cookie: {
-      httpOnly: true,
-      secure: true,
-      maxAge: sessionTtl,
-    },
+    cookie: { httpOnly: true, secure: true, maxAge: sessionTtl },
   });
 }
 
@@ -69,6 +70,24 @@ async function upsertUser(
 export async function setupAuth(app: Express) {
   app.set("trust proxy", 1);
   app.use(getSession());
+
+  if (useDevAuth) {
+    // Lightweight dev auth: inject a stable dev user and bypass OIDC
+    app.use((req, _res, next) => {
+      (req as any).user = {
+        claims: {
+          sub: "employer",
+          email: "employer@tylerbustard.ca",
+          first_name: "Dev",
+          last_name: "User",
+          exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24,
+        },
+      };
+      next();
+    });
+    return;
+  }
+
   app.use(passport.initialize());
   app.use(passport.session());
 
@@ -84,8 +103,7 @@ export async function setupAuth(app: Express) {
     verified(null, user);
   };
 
-  for (const domain of process.env
-    .REPLIT_DOMAINS!.split(",")) {
+  for (const domain of (process.env.REPLIT_DOMAINS || "").split(",").filter(Boolean)) {
     const strategy = new Strategy(
       {
         name: `replitauth:${domain}`,
@@ -128,6 +146,15 @@ export async function setupAuth(app: Express) {
 }
 
 export const isAuthenticated: RequestHandler = async (req, res, next) => {
+  if (useDevAuth) {
+    console.log('Using dev auth, setting user to tylerbustard');
+    if (!(req as any).user) {
+      (req as any).user = { claims: { sub: "tylerbustard" } };
+    }
+    console.log('User set to:', (req as any).user);
+    return next();
+  }
+
   const user = req.user as any;
 
   if (!req.isAuthenticated() || !user.expires_at) {

@@ -1,35 +1,69 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Eye, EyeOff, ArrowLeft } from "lucide-react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
+import { useSimpleAuth } from "@/hooks/useSimpleAuth";
 
-export default function ResumeUploadSignIn() {
+interface ResumeUploadSignInProps {
+  variation?: 'universityoftoronto' | 'queensuniversity' | 'profile' | null;
+}
+
+export default function ResumeUploadSignIn({ variation = null }: ResumeUploadSignInProps = {}) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [previousPage, setPreviousPage] = useState<string | null>(null);
   const { toast } = useToast();
+  const { login } = useSimpleAuth();
+  const [, setLocation] = useLocation();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Get the previous page from localStorage or default to home
+  useEffect(() => {
+    const storedPreviousPage = localStorage.getItem('previousPage');
+    if (storedPreviousPage) {
+      setPreviousPage(storedPreviousPage);
+    } else {
+      // Default to home page for the current variation
+      const basePath = variation ? `/${variation}` : '';
+      setPreviousPage(`${basePath}/`);
+    }
+  }, [variation]);
+
+  const handleBack = () => {
+    if (previousPage && previousPage !== '/sign-in') {
+      setLocation(previousPage);
+    } else {
+      // Fallback to home page for current variation
+      const basePath = variation ? `/${variation}` : '';
+      setLocation(`${basePath}/`);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Check credentials
-    if (username === 'tylerbustard' && password === 'Mvn7c7bb!!') {
-      localStorage.setItem('resumeUploadAuth', JSON.stringify({ username }));
-      window.location.href = '/upload-resume';
+    const result = await login(username, password);
+    
+    if (result.success) {
       toast({
         title: "Login Successful",
-        description: "Welcome! You can now upload resume files.",
+        description: "Welcome! You can now upload and manage your content.",
       });
+      // Clear the previous page from localStorage
+      localStorage.removeItem('previousPage');
+      // Navigate to the appropriate upload page based on variation
+      const basePath = variation ? `/${variation}` : '';
+      setLocation(`${basePath}/upload`);
     } else {
       toast({
         title: "Login Failed",
-        description: "Invalid username or password. Please try again.",
+        description: result.error || "Invalid username or password. Please try again.",
         variant: "destructive",
       });
     }
@@ -37,25 +71,43 @@ export default function ResumeUploadSignIn() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: '#f5f5f7' }}>
-      <Card className="w-full max-w-md bg-white/95 backdrop-blur-xl border border-white/40 shadow-xl">
-        <CardHeader className="text-center space-y-2">
-          <CardTitle className="text-2xl font-semibold text-gray-900" style={{ 
+    <div className="min-h-screen" style={{ backgroundColor: "#f8fafc" }}>
+      <div className="flex items-center justify-center min-h-screen px-6 py-12">
+        <Card className="w-full max-w-lg bg-white shadow-xl border border-gray-200 rounded-2xl">
+        <CardHeader className="text-center space-y-4 p-10 pb-6">
+          {/* Back Button */}
+          <div className="flex justify-start mb-8">
+            <Button
+              variant="ghost"
+              onClick={handleBack}
+              className="text-gray-600 hover:text-gray-900 font-medium p-2 -ml-2 hover:bg-gray-100 rounded-lg transition-colors"
+              data-testid="button-back"
+              style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back
+            </Button>
+          </div>
+          <CardTitle className="text-3xl font-bold text-gray-900 mb-2" style={{ 
             fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif',
             letterSpacing: '-0.025em'
           }}>
-            Resume Upload Access
+            Upload Access
           </CardTitle>
-          <CardDescription className="text-gray-600" style={{ 
+          <CardDescription className="text-lg text-gray-600 max-w-md mx-auto leading-relaxed" style={{ 
             fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' 
           }}>
-            Sign in to upload and manage resume files
+            Sign in to upload and manage your resume and introduction video
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="username" className="text-gray-700 font-medium">Username</Label>
+        <CardContent className="p-10 pt-2">
+          <form onSubmit={handleSubmit} className="space-y-8">
+            <div className="space-y-4">
+              <Label htmlFor="username" className="text-sm font-semibold text-gray-700" style={{ 
+                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' 
+              }}>
+                Username
+              </Label>
               <Input
                 id="username"
                 type="text"
@@ -64,13 +116,17 @@ export default function ResumeUploadSignIn() {
                 placeholder="Enter your username"
                 required
                 data-testid="input-username"
-                className="bg-white border-gray-200 focus:border-blue-500"
+                className="bg-white border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 rounded-xl px-4 py-4 text-base"
                 style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}
               />
             </div>
             
-            <div className="space-y-2">
-              <Label htmlFor="password" className="text-gray-700 font-medium">Password</Label>
+            <div className="space-y-4">
+              <Label htmlFor="password" className="text-sm font-semibold text-gray-700" style={{ 
+                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' 
+              }}>
+                Password
+              </Label>
               <div className="relative">
                 <Input
                   id="password"
@@ -80,32 +136,42 @@ export default function ResumeUploadSignIn() {
                   placeholder="Enter your password"
                   required
                   data-testid="input-password"
-                  className="bg-white border-gray-200 focus:border-blue-500 pr-10"
+                  className="bg-white border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 pr-12 rounded-xl px-4 py-4 text-base"
                   style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors p-1"
                   data-testid="button-toggle-password"
                 >
-                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
             </div>
             
-            <Button 
-              type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl py-2.5 transition-all duration-200 hover:scale-105"
-              disabled={isLoading}
-              data-testid="button-login"
-              style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}
-            >
-              {isLoading ? "Signing In..." : "Sign In"}
-            </Button>
+            <div className="pt-4">
+              <Button 
+                type="submit"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl py-4 px-6 transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl text-base"
+                disabled={isLoading}
+                data-testid="button-login"
+                style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}
+              >
+                {isLoading ? (
+                  <div className="flex items-center justify-center gap-3">
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                    Signing In...
+                  </div>
+                ) : (
+                  "Sign In"
+                )}
+              </Button>
+            </div>
           </form>
         </CardContent>
       </Card>
+      </div>
     </div>
   );
 }

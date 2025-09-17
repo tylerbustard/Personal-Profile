@@ -61,7 +61,7 @@ export default function ContactSection() {
   };
 
   const contactInfo = [
-    { icon: HiOutlineMail, label: "Email", value: "tbustard@unb.ca" },
+    { icon: HiOutlineMail, label: "Email", value: "tylerbustard@hotmail.com" },
     { icon: HiOutlinePhone, label: "Phone", value: "(613) 985-1223" },
     { icon: HiOutlineLocationMarker, label: "Location", value: "Toronto, Ontario, Canada" },
   ];
@@ -233,7 +233,7 @@ export default function ContactSection() {
           </p>
           <div className="flex justify-center gap-8">
             <a 
-              href="mailto:tbustard@unb.ca"
+              href="mailto:tylerbustard@hotmail.com"
               className="inline-flex items-center gap-2 font-medium text-primary hover:text-primary/80 transition-all duration-500"
               data-testid="link-email-direct"
             >

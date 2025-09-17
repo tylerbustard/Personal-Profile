@@ -151,31 +151,32 @@ export default function ExperienceSection() {
     <section 
       ref={sectionAnimation.ref}
       id="experience" 
-      className={`py-16 sm:py-24 lg:py-32 relative overflow-hidden scroll-fade-in ${sectionAnimation.isVisible ? 'visible' : ''}`}
+      className={`py-20 sm:py-28 lg:py-36 relative overflow-hidden scroll-fade-in ${sectionAnimation.isVisible ? 'visible' : ''}`}
     >
       {/* Background - inherits Apple grey from parent */}
       
       <div className="container-width">
-        <div className="bg-white/90 backdrop-blur-xl rounded-[28px] p-6 sm:p-8 lg:p-12 border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-500">
-          {/* Header */}
-          <div 
-            ref={headerAnimation.ref}
-            className={`text-center mb-8 sm:mb-12 lg:mb-16 scroll-slide-up ${headerAnimation.isVisible ? 'visible' : ''}`}
-          >
-            <h2 className="text-5xl lg:text-6xl font-bold text-foreground mb-6 tracking-tight">
-              Experience
-            </h2>
-            <p className="text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Professional experience in finance, banking and accounting
-            </p>
-          </div>
+        {/* Header - Outside the card */}
+        <div 
+          ref={headerAnimation.ref}
+          className={`text-center mb-12 sm:mb-16 lg:mb-20 scroll-slide-up ${headerAnimation.isVisible ? 'visible' : ''}`}
+        >
+          <h2 className="text-5xl lg:text-6xl font-bold text-foreground mb-6 tracking-tight" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>
+            Experience
+          </h2>
+          <p className="text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
+            Professional experience in finance, banking and accounting
+          </p>
+        </div>
+
+        <div className="bg-white/90 backdrop-blur-xl rounded-[28px] p-8 sm:p-10 lg:p-12 border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-500">
 
         {/* Experience Timeline */}
         <div ref={experiencesRef} className="relative">
           {/* Clean Timeline Line */}
           <div className="absolute left-8 top-0 bottom-0 w-px bg-gray-200 hidden md:block"></div>
           
-          <div className="space-y-6 sm:space-y-8">
+          <div className="space-y-8 sm:space-y-10">
             {experiences.map((exp, index) => (
               <div 
                 key={index} 
@@ -213,27 +214,27 @@ export default function ExperienceSection() {
                         {/* Content on right */}
                         <div className="flex-1">
                           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1 gap-0 sm:gap-0">
-                            <h3 className="text-xl font-bold text-foreground">
+                            <h3 className="text-xl font-bold text-foreground" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>
                               {exp.title}
                             </h3>
-                            <span className="hidden sm:block text-base font-medium text-gray-500">{exp.period}</span>
+                            <span className="hidden sm:block text-base font-medium text-gray-500" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>{exp.period}</span>
                           </div>
                           <div className="space-y-0">
-                            <p className="text-lg font-semibold text-primary">{exp.company}</p>
-                            <p className="text-base text-muted-foreground">{exp.location}</p>
-                            <span className="block sm:hidden text-base font-medium text-gray-500">{exp.period}</span>
+                            <p className="text-lg font-semibold text-primary" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>{exp.company}</p>
+                            <p className="text-base text-muted-foreground" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>{exp.location}</p>
+                            <span className="block sm:hidden text-base font-medium text-gray-500" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>{exp.period}</span>
                           </div>
                         </div>
                       </div>
 
                       {/* Key Achievements */}
                       <div className="mb-6">
-                        <h4 className="font-semibold text-foreground mb-4">Key Achievements</h4>
+                        <h4 className="font-semibold text-foreground mb-4" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>Key Achievements</h4>
                         <div className="space-y-3">
                           {exp.achievements.map((achievement, achievementIndex) => (
                             <div key={achievementIndex} className="flex items-start gap-3">
                               <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2.5 flex-shrink-0"></div>
-                              <p className="text-base text-muted-foreground font-medium leading-relaxed">{achievement}</p>
+                              <p className="text-base text-muted-foreground font-medium leading-relaxed" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>{achievement}</p>
                             </div>
                           ))}
                         </div>
@@ -241,7 +242,7 @@ export default function ExperienceSection() {
 
                       {/* Skills & Technologies */}
                       <div>
-                        <h4 className="font-semibold text-foreground mb-3">Core Competencies</h4>
+                        <h4 className="font-semibold text-foreground mb-3" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>Core Competencies</h4>
                         
                         {/* Mobile version - Row format */}
                         <div className="sm:hidden space-y-2">

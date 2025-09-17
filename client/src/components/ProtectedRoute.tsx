@@ -1,14 +1,21 @@
-import { useAuth } from "@/hooks/useAuth";
+import { useSimpleAuth } from "@/hooks/useSimpleAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Lock, LogIn } from "lucide-react";
+import { Link, useLocation } from "wouter";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
 }
 
 export function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { user, isLoading, isAuthenticated } = useAuth();
+  const { user, isLoading, isAuthenticated } = useSimpleAuth();
+  const [location] = useLocation();
+  
+  // Determine variation from current location
+  const pathParts = location.split('/').filter(Boolean);
+  const variation = pathParts[0] === 'universityoftoronto' || pathParts[0] === 'queensuniversity' || pathParts[0] === 'profile' ? pathParts[0] : null;
+  const basePath = variation ? `/${variation}` : '';
 
   if (isLoading) {
     return (
@@ -44,16 +51,23 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <Button 
-              onClick={() => window.location.href = '/api/login'}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white"
-              data-testid="button-sign-in"
+            <Link 
+              href={`${basePath}/sign-in`}
+              onClick={() => {
+                // Store current location as previous page
+                localStorage.setItem('previousPage', location);
+              }}
             >
-              <LogIn className="w-4 h-4 mr-2" />
-              Sign In with Replit
-            </Button>
+              <Button 
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                data-testid="button-sign-in"
+              >
+                <LogIn className="w-4 h-4 mr-2" />
+                Sign In
+              </Button>
+            </Link>
             <p className="text-xs text-gray-500 text-center">
-              This will redirect you to Replit for secure authentication
+              Please sign in to access this private resume page
             </p>
           </CardContent>
         </Card>
