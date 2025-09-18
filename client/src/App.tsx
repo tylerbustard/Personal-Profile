@@ -29,9 +29,9 @@ function SubdirectoryRouter() {
 
   return (
     <Switch>
-      {/* Root paths */}
-      <Route path="/" component={() => <Home />} />
-      <Route path="/resume" component={() => <Resume />} />
+      {/* Root paths now use the profile variation by default */}
+      <Route path="/" component={() => <Home variation="profile" />} />
+      <Route path="/resume" component={() => <Resume variation="profile" />} />
       <Route path="/upload" component={() => <UploadResumeDashboard />} />
       <Route path="/sign-in" component={() => <ResumeUploadSignIn />} />
       <Route path="/resume-tech">
@@ -50,49 +50,48 @@ function SubdirectoryRouter() {
         </ProtectedRoute>
       </Route>
       
-      {/* University of Toronto subdirectory */}
-      <Route path="/universityoftoronto" component={() => <Home variation="universityoftoronto" />} />
-      <Route path="/universityoftoronto/resume" component={() => <Resume variation="universityoftoronto" />} />
-      <Route path="/universityoftoronto/upload" component={() => <UploadResumeDashboard variation="universityoftoronto" />} />
-      <Route path="/universityoftoronto/sign-in" component={() => <ResumeUploadSignIn variation="universityoftoronto" />} />
+      {/* Legacy subdirectories redirect to main equivalents */}
+      <Route path="/universityoftoronto" component={() => <Home variation="profile" />} />
+      <Route path="/universityoftoronto/resume" component={() => <Resume variation="profile" />} />
+      <Route path="/universityoftoronto/upload" component={() => <UploadResumeDashboard variation="profile" />} />
+      <Route path="/universityoftoronto/sign-in" component={() => <ResumeUploadSignIn variation="profile" />} />
       <Route path="/universityoftoronto/resume-tech">
         <ProtectedRoute>
-          <ResumeVariation1 variation="universityoftoronto" />
+          <ResumeVariation1 variation="profile" />
         </ProtectedRoute>
       </Route>
       <Route path="/universityoftoronto/resume-finance">
         <ProtectedRoute>
-          <ResumeVariation2 variation="universityoftoronto" />
+          <ResumeVariation2 variation="profile" />
         </ProtectedRoute>
       </Route>
       <Route path="/universityoftoronto/resume-leadership">
         <ProtectedRoute>
-          <ResumeVariation3 variation="universityoftoronto" />
+          <ResumeVariation3 variation="profile" />
         </ProtectedRoute>
       </Route>
       
-      {/* Queen's University subdirectory */}
-      <Route path="/queensuniversity" component={() => <Home variation="queensuniversity" />} />
-      <Route path="/queensuniversity/resume" component={() => <Resume variation="queensuniversity" />} />
-      <Route path="/queensuniversity/upload" component={() => <UploadResumeDashboard variation="queensuniversity" />} />
-      <Route path="/queensuniversity/sign-in" component={() => <ResumeUploadSignIn variation="queensuniversity" />} />
+      <Route path="/queensuniversity" component={() => <Home variation="profile" />} />
+      <Route path="/queensuniversity/resume" component={() => <Resume variation="profile" />} />
+      <Route path="/queensuniversity/upload" component={() => <UploadResumeDashboard variation="profile" />} />
+      <Route path="/queensuniversity/sign-in" component={() => <ResumeUploadSignIn variation="profile" />} />
       <Route path="/queensuniversity/resume-tech">
         <ProtectedRoute>
-          <ResumeVariation1 variation="queensuniversity" />
+          <ResumeVariation1 variation="profile" />
         </ProtectedRoute>
       </Route>
       <Route path="/queensuniversity/resume-finance">
         <ProtectedRoute>
-          <ResumeVariation2 variation="queensuniversity" />
+          <ResumeVariation2 variation="profile" />
         </ProtectedRoute>
       </Route>
       <Route path="/queensuniversity/resume-leadership">
         <ProtectedRoute>
-          <ResumeVariation3 variation="queensuniversity" />
+          <ResumeVariation3 variation="profile" />
         </ProtectedRoute>
       </Route>
       
-      {/* Profile subdirectory */}
+      {/* Profile subdirectory (legacy) */}
       <Route path="/profile" component={() => <Home variation="profile" />} />
       <Route path="/profile/resume" component={() => <Resume variation="profile" />} />
       <Route path="/profile/upload" component={() => <UploadResumeDashboard variation="profile" />} />

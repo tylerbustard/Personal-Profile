@@ -20,7 +20,7 @@ export default function UploadResumeDashboard({ variation = null }: UploadResume
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const { logout } = useSimpleAuth();
-  const [, setLocation] = useLocation();
+  const [location, setLocation] = useLocation();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [description, setDescription] = useState("");
   const [uploading, setUploading] = useState(false);
@@ -764,7 +764,7 @@ export default function UploadResumeDashboard({ variation = null }: UploadResume
                 </div>
               ) : (
                 <div className="space-y-3">
-                  {videos.map((video) => (
+                  {videos.map((video: { id: string; title?: string; fileName?: string; fileSize?: number; uploadedAt?: string }) => (
                     <div
                       key={video.id}
                       className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-200"
@@ -781,7 +781,7 @@ export default function UploadResumeDashboard({ variation = null }: UploadResume
                             {video.title || video.fileName}
                           </p>
                           <p className="text-xs text-gray-500">
-                            {formatFileSize(video.fileSize)} • {formatDate(video.uploadedAt)}
+                            {formatFileSize(video.fileSize ?? 0)} • {formatDate(video.uploadedAt ?? new Date())}
                           </p>
                         </div>
                       </div>

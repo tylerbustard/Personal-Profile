@@ -93,7 +93,7 @@ export default function HeroSection() {
                 {/* Action Buttons */}
                 <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-2 sm:pt-4">
                   {/* Only show video button if videos exist */}
-                  {videosQuery.data && Array.isArray(videosQuery.data) && videosQuery.data.length > 0 && (
+                  {Boolean(videosQuery.data && Array.isArray(videosQuery.data) && videosQuery.data.length > 0) && (
                     <Button
                       onClick={() => {
                         console.log('Button clicked. Videos data:', videosQuery.data);
@@ -196,10 +196,7 @@ export default function HeroSection() {
                       <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
                         <Play size={16} className="ml-0.5" />
                       </div>
-                      {videosQuery.data && 
-                       Array.isArray(videosQuery.data) &&
-                       videosQuery.data.length > 0 &&
-                       videosQuery.data.find((video: any) => video.isActive) ? 'Watch Introduction Video' : 'Introduction'}
+                      {Boolean(videosQuery.data && Array.isArray(videosQuery.data) && videosQuery.data.length > 0 && videosQuery.data.find((video: any) => video.isActive)) ? 'Watch Introduction Video' : 'Introduction'}
                     </Button>
                   )}
                 </div>

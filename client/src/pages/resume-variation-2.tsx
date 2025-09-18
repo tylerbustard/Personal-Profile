@@ -103,7 +103,7 @@ export default function ResumeVariation2({ variation = null }: ResumeVariation2P
                   <div id="contact" className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-600 mt-4 scroll-mt-24">
                     <div className="flex items-center gap-1.5">
                       <Mail className="w-3.5 h-3.5 text-blue-500" />
-                      <span>tylerbustard@hotmail.com</span>
+                      <span>tbustard@unb.ca</span>
                     </div>
                     <div className="flex items-center gap-1.5">
                       <Phone className="w-3.5 h-3.5 text-blue-500" />
