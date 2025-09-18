@@ -6,6 +6,7 @@ import tdLogo from "@assets/Toronto-Dominion_Bank_logo.svg_1755913265896.png";
 import rbcLogo from "@assets/RBC-Logo_1755913716813.png";
 import irvingLogo from "@assets/Irving_Oil.svg_1755913265895.png";
 import grantThorntonLogo from "@assets/Grant_Thornton_logo_1755913265895.png";
+import fiscalAiLogo from "@assets/fiscal_ai_logo_new.png";
 
 interface Experience {
   title: string;
@@ -41,7 +42,11 @@ function CounterStat({ end, suffix = '', prefix = '', label, className = '', del
   );
 }
 
-export default function ExperienceSection() {
+interface ExperienceSectionProps {
+  variation?: 'universityoftoronto' | 'queensuniversity' | 'profile' | null;
+}
+
+export default function ExperienceSection({ variation = null }: ExperienceSectionProps = {}) {
   const sectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true });
   
   // Mobile fallback - ensure content is visible on small screens
@@ -54,13 +59,14 @@ export default function ExperienceSection() {
     delay: isMobile ? 0 : 100 
   });
   
-  const { ref: experiencesRef, visibleItems } = useStaggeredScrollAnimation(7, { 
+  const { ref: experiencesRef, visibleItems } = useStaggeredScrollAnimation(variation === 'profile' ? 8 : 7, { 
     threshold: 0.1, 
     triggerOnce: true, 
     delay: isMobile ? 0 : 150 
   });
 
-  const experiences: Experience[] = [
+  // Base experiences array
+  const baseExperiences: Experience[] = [
     {
       title: "Portfolio Assistant",
       company: "BMO Private Wealth",
@@ -146,6 +152,27 @@ export default function ExperienceSection() {
       color: "#8B5CF6"
     },
   ];
+
+  // Profile-specific experience for Fiscal.ai
+  const fiscalAiExperience: Experience = {
+    title: "Equity Analyst",
+    company: "Fiscal.ai",
+    location: "Toronto, Ontario",
+    period: "2023-Present",
+    duration: "2+ years",
+    achievements: [
+      "Analyze and compile public company financial statements, cutting reporting turnaround by 13%",
+      "Collaborate with product and engineering to implement AI-driven data features, boosting adoption by 12%",
+    ],
+    technologies: ["Financial Analysis", "AI Integration", "Data Analytics", "Python", "SQL"],
+    logoSrc: fiscalAiLogo,
+    color: "#6366F1"
+  };
+
+  // Create final experiences array based on variation
+  const experiences: Experience[] = variation === 'profile' 
+    ? [fiscalAiExperience, ...baseExperiences]
+    : baseExperiences;
 
   return (
     <section 

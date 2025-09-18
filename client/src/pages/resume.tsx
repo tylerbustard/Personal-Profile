@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -23,12 +24,14 @@ import bloombergLogo from "@assets/bloomberg_1755923720190.png";
 import wallStreetPrepLogo from "@assets/wall street prep_1755923720193.png";
 import courseraLogo from "@assets/Coursera_1755937682843.png";
 import mcgillLogo from "@assets/mcgill_1755937693386.png";
+import fiscalAiLogo from "@assets/fiscal_ai_logo_new.png";
 
 interface ResumeProps {
   variation?: 'universityoftoronto' | 'queensuniversity' | 'profile' | null;
 }
 
 export default function Resume({ variation = null }: ResumeProps = {}) {
+  const [location] = useLocation();
   const [showScrollToTop, setShowScrollToTop] = useState(false);
   
   // Fetch resumes to check if any exist
@@ -209,35 +212,74 @@ export default function Resume({ variation = null }: ResumeProps = {}) {
             <section id="education" className="mb-5 scroll-mt-24">
               <h3 className="text-base font-bold text-gray-900 mb-4 uppercase tracking-wide" style={{ letterSpacing: '0.05em' }}>Education</h3>
               
-              <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm ">
-                <div className="flex gap-3">
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-white rounded-lg shadow-sm flex items-center justify-center border border-blue-200">
-                      <img src={unbLogo} alt="UNB" className="w-7 h-7 object-contain" />
+              <div className="space-y-4">
+                {/* McGill University - Profile Variation Only */}
+                {variation === 'profile' && (
+                  <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
+                    <div className="flex gap-3">
+                      <div className="flex-shrink-0">
+                        <div className="w-12 h-12 bg-white rounded-lg shadow-sm flex items-center justify-center border border-red-200">
+                          <img src={mcgillLogo} alt="McGill" className="w-7 h-7 object-contain" />
+                        </div>
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex justify-between items-start mb-3">
+                          <div>
+                            <h4 className="text-sm font-bold text-gray-900">Master of Management in Finance Candidate</h4>
+                            <p className="text-sm text-blue-600 font-semibold">Desautels Faculty of Management • McGill University</p>
+                          </div>
+                          <span className="text-xs text-gray-600 px-1.5 py-0.5 rounded">2025-2026</span>
+                        </div>
+                        <ul className="space-y-2">
+                          <li className="text-sm text-gray-700 flex items-start">
+                            <span className="text-red-500 mr-2">•</span>
+                            <span>Head of Risk Management - Desautels Capital Management Fund</span>
+                          </li>
+                          <li className="text-sm text-gray-700 flex items-start">
+                            <span className="text-red-500 mr-2">•</span>
+                            <span>Chief Sustainability Officer - DCM Socially Responsible Investing Fund</span>
+                          </li>
+                          <li className="text-sm text-gray-700 flex items-start">
+                            <span className="text-red-500 mr-2">•</span>
+                            <span>Recipient of 2 Scholarships for academic merit and leadership skills, Total $13,000</span>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex-1">
-                    <div className="flex justify-between items-start mb-3">
-                      <div>
-                        <h4 className="text-sm font-bold text-gray-900">Bachelor of Business Administration</h4>
-                        <p className="text-sm text-blue-600 font-semibold">Finance Major • University of New Brunswick</p>
+                )}
+
+                {/* University of New Brunswick */}
+                <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
+                  <div className="flex gap-3">
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12 bg-white rounded-lg shadow-sm flex items-center justify-center border border-blue-200">
+                        <img src={unbLogo} alt="UNB" className="w-7 h-7 object-contain" />
                       </div>
-                      <span className="text-xs text-gray-600 px-1.5 py-0.5 rounded">2016-2020</span>
                     </div>
-                    <ul className="space-y-2">
-                      <li className="text-sm text-gray-700 flex items-start">
-                        <span className="text-blue-500 mr-2">•</span>
-                        <span>Analyst and Portfolio Manager - University of New Brunswick Student Investment Fund</span>
-                      </li>
-                      <li className="text-sm text-gray-700 flex items-start">
-                        <span className="text-blue-500 mr-2">•</span>
-                        <span>Member of UNB Finance Club, RBC Student Ambassador, Accredited Co-op Program</span>
-                      </li>
-                      <li className="text-sm text-gray-700 flex items-start">
-                        <span className="text-blue-500 mr-2">•</span>
-                        <span>Recipient of 5 Scholarship for academic merit and leadership skills, Total $47,500</span>
-                      </li>
-                    </ul>
+                    <div className="flex-1">
+                      <div className="flex justify-between items-start mb-3">
+                        <div>
+                          <h4 className="text-sm font-bold text-gray-900">Bachelor of Business Administration</h4>
+                          <p className="text-sm text-blue-600 font-semibold">Finance Major • University of New Brunswick</p>
+                        </div>
+                        <span className="text-xs text-gray-600 px-1.5 py-0.5 rounded">2016-2020</span>
+                      </div>
+                      <ul className="space-y-2">
+                        <li className="text-sm text-gray-700 flex items-start">
+                          <span className="text-blue-500 mr-2">•</span>
+                          <span>Analyst and Portfolio Manager - University of New Brunswick Student Investment Fund</span>
+                        </li>
+                        <li className="text-sm text-gray-700 flex items-start">
+                          <span className="text-blue-500 mr-2">•</span>
+                          <span>Member of UNB Finance Club, Royal Bank of Canada Student Ambassador, Accredited Co-op Program</span>
+                        </li>
+                        <li className="text-sm text-gray-700 flex items-start">
+                          <span className="text-blue-500 mr-2">•</span>
+                          <span>Recipient of 5 Scholarship for academic merit and leadership skills, Total $47,500</span>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -248,8 +290,45 @@ export default function Resume({ variation = null }: ResumeProps = {}) {
               <h3 className="text-base font-bold text-gray-900 mb-4 uppercase tracking-wide" style={{ letterSpacing: '0.05em' }}>Professional Experience</h3>
               
               <div className="space-y-4">
+                {/* Current Role - Fiscal.ai */}
+                <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
+                  <div className="flex gap-3">
+                    <div className="flex-shrink-0">
+                      <div className="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center border border-gray-200">
+                        <img src={fiscalAiLogo} alt="Fiscal.ai" className="w-7 h-7 object-contain" />
+                      </div>
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex justify-between items-start mb-3">
+                        <div>
+                          <h4 className="text-sm font-bold text-gray-900">Equity Analyst</h4>
+                          <p className="text-sm text-blue-600 font-semibold">Fiscal.ai • Toronto, ON</p>
+                        </div>
+                        <span className="text-xs text-gray-600 px-1.5 py-0.5 rounded">2023-Present</span>
+                      </div>
+                      <ul className="space-y-1 mb-3">
+                        <li className="text-sm text-gray-700 flex items-start">
+                          <span className="text-blue-500 mr-2">•</span>
+                          <span>Analyze and compile public company financial statements, cutting reporting turnaround by 13%</span>
+                        </li>
+                        <li className="text-sm text-gray-700 flex items-start">
+                          <span className="text-blue-500 mr-2">•</span>
+                          <span>Collaborate with product and engineering to implement AI-driven data features, boosting adoption by 12%</span>
+                        </li>
+                      </ul>
+                      <div className="flex flex-wrap gap-2">
+                        {['Financial Analysis', 'AI Integration', 'Data Analytics', 'Python', 'SQL'].map(skill => (
+                          <span key={skill} className="inline-block px-1.5 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 {/* BMO Private Wealth */}
-                <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm ">
+                <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
                   <div className="flex gap-3">
                     <div className="flex-shrink-0">
                       <div className="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center border border-blue-200">
@@ -285,133 +364,117 @@ export default function Resume({ variation = null }: ResumeProps = {}) {
                   </div>
                 </div>
 
-                {/* TD Canada Trust */}
-                <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm ">
-                  <div className="flex gap-3">
-                    <div className="flex-shrink-0">
-                      <div className="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center border border-green-200">
-                        <img src={tdLogo} alt="TD" className="w-7 h-7 object-contain" />
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex justify-between items-start mb-3">
-                        <div>
-                          <h4 className="text-sm font-bold text-gray-900">Financial Advisor</h4>
-                          <p className="text-sm text-blue-600 font-semibold">TD Canada Trust • Kingston, ON</p>
+                {/* Early Career Experience */}
+                <div>
+                  <h4 className="text-sm font-bold text-gray-900 mb-3 uppercase tracking-wide" style={{ letterSpacing: '0.05em' }}>Early Career Experience</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {/* TD Canada Trust */}
+                    <div className="bg-white rounded-xl border border-gray-200 p-3 shadow-sm">
+                      <div className="flex gap-3">
+                        <div className="flex-shrink-0">
+                          <div className="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center border border-green-200">
+                            <img src={tdLogo} alt="TD" className="w-7 h-7 object-contain" />
+                          </div>
                         </div>
-                        <span className="text-xs text-gray-600 px-1.5 py-0.5 rounded">2021-2022</span>
-                      </div>
-                      <ul className="space-y-1 mb-3">
-                        <li className="text-sm text-gray-700 flex items-start">
-                          <span className="text-blue-500 mr-2">•</span>
-                          <span>Cultivated strong client relationships, achieving 11% sales increase through needs-based advisory</span>
-                        </li>
-                        <li className="text-sm text-gray-700 flex items-start">
-                          <span className="text-blue-500 mr-2">•</span>
-                          <span>Exceeded targets, achieving top 15% performance ranking within district</span>
-                        </li>
-                      </ul>
-                      <div className="flex flex-wrap gap-2">
-                        {['Financial Planning', 'Sales', 'Investment Advisory', 'Compliance', 'CRM'].map(skill => (
-                          <span key={skill} className="inline-block px-1.5 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* RBC Banking Advisor */}
-                <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm ">
-                  <div className="flex gap-3">
-                    <div className="flex-shrink-0">
-                      <div className="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center border border-gray-200">
-                        <img src={rbcLogo} alt="RBC" className="w-7 h-7 object-contain" />
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex justify-between items-start mb-3">
-                        <div>
-                          <h4 className="text-sm font-bold text-gray-900">Banking Advisor</h4>
-                          <p className="text-sm text-blue-600 font-semibold">Royal Bank of Canada • Kingston, ON</p>
+                        <div className="flex-1">
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <h5 className="text-sm font-bold text-gray-900">Financial Advisor</h5>
+                              <p className="text-sm text-blue-600 font-semibold">TD Canada Trust</p>
+                              <p className="text-sm text-gray-600">Kingston, ON</p>
+                            </div>
+                            <span className="text-xs text-gray-600 px-1.5 py-0.5 rounded">2021-2022</span>
+                          </div>
                         </div>
-                        <span className="text-xs text-gray-600 px-1.5 py-0.5 rounded">2020-2021</span>
                       </div>
-                      <ul className="space-y-1 mb-3">
-                        <li className="text-sm text-gray-700 flex items-start">
-                          <span className="text-blue-500 mr-2">•</span>
-                          <span>Strengthened client relationships by advising on personalized solutions, increased repeat transactions by 13%</span>
-                        </li>
-                        <li className="text-sm text-gray-700 flex items-start">
-                          <span className="text-blue-500 mr-2">•</span>
-                          <span>Excelled in needs-based advising, boosting adoption of core products like GICs, mutual funds, and TFSAs by 8%</span>
-                        </li>
-                      </ul>
-                      <div className="flex flex-wrap gap-2">
-                        {['Banking Products', 'Financial Advisory', 'Client Relationship Management', 'Digital Banking'].map(skill => (
-                          <span key={skill} className="inline-block px-1.5 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">
-                            {skill}
-                          </span>
-                        ))}
+                    </div>
+
+                    {/* RBC Banking Advisor */}
+                    <div className="bg-white rounded-xl border border-gray-200 p-3 shadow-sm">
+                      <div className="flex gap-3">
+                        <div className="flex-shrink-0">
+                          <div className="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center border border-blue-200">
+                            <img src={rbcLogo} alt="Royal Bank of Canada" className="w-7 h-7 object-contain" />
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <h5 className="text-sm font-bold text-gray-900">Banking Advisor</h5>
+                              <p className="text-sm text-blue-600 font-semibold">Royal Bank of Canada</p>
+                              <p className="text-sm text-gray-600">Kingston, ON</p>
+                            </div>
+                            <span className="text-xs text-gray-600 px-1.5 py-0.5 rounded">2020-2021</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-              </div>
-            </section>
-
-            {/* Co-op Experience Section */}
-            <section id="co-op-experience" className="mb-5 scroll-mt-24">
-              <h3 className="text-base font-bold text-gray-900 mb-4 uppercase tracking-wide" style={{ letterSpacing: '0.05em' }}>Co-op Experience</h3>
-              
-              <div className="space-y-3">
-                {/* RBC Client Advisor */}
-                <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm ">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center border border-gray-200">
-                        <img src={rbcLogo} alt="RBC" className="w-7 h-7 object-contain" />
-                      </div>
-                      <div>
-                        <h4 className="text-sm font-bold text-gray-900">Client Advisor Intern</h4>
-                        <p className="text-sm text-blue-600 font-semibold">RBC • Fredericton, NB</p>
-                      </div>
-                    </div>
-                    <span className="text-xs text-gray-600 px-1.5 py-0.5 rounded">2019-2020</span>
-                  </div>
-                </div>
-
-                {/* Irving Oil Marketing */}
-                <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm ">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center border border-gray-200">
-                        <img src={irvingLogo} alt="Irving Oil" className="w-7 h-7 object-contain" />
-                      </div>
-                      <div>
-                        <h4 className="text-sm font-bold text-gray-900">Marketing Intern</h4>
-                        <p className="text-sm text-blue-600 font-semibold">Irving Oil • Saint John, NB</p>
+                {/* Co-op Experience */}
+                <div>
+                  <h4 className="text-sm font-bold text-gray-900 mb-3 uppercase tracking-wide" style={{ letterSpacing: '0.05em' }}>Co-op Experience</h4>
+                  <div className="space-y-3">
+                    {/* RBC Client Advisor Intern */}
+                    <div className="bg-white rounded-xl border border-gray-200 p-3 shadow-sm">
+                      <div className="flex gap-3">
+                        <div className="flex-shrink-0">
+                          <div className="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center border border-blue-200">
+                            <img src={rbcLogo} alt="Royal Bank of Canada" className="w-7 h-7 object-contain" />
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <h5 className="text-sm font-bold text-gray-900">Client Advisor Intern</h5>
+                              <p className="text-sm text-blue-600 font-semibold">Royal Bank of Canada • Fredericton, NB</p>
+                            </div>
+                            <span className="text-xs text-gray-600 px-1.5 py-0.5 rounded">2019-2020</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <span className="text-xs text-gray-600 px-1.5 py-0.5 rounded">2018</span>
-                  </div>
-                </div>
 
-                {/* Grant Thornton Tax */}
-                <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm ">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center border border-gray-200">
-                        <img src={grantThorntonLogo} alt="Grant Thornton" className="w-7 h-7 object-contain" />
-                      </div>
-                      <div>
-                        <h4 className="text-sm font-bold text-gray-900">Tax Return Intern</h4>
-                        <p className="text-sm text-blue-600 font-semibold">Grant Thornton LLP • Saint John, NB</p>
+                    {/* Irving Oil Marketing Intern */}
+                    <div className="bg-white rounded-xl border border-gray-200 p-3 shadow-sm">
+                      <div className="flex gap-3">
+                        <div className="flex-shrink-0">
+                          <div className="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center border border-red-200">
+                            <img src={irvingLogo} alt="Irving Oil" className="w-7 h-7 object-contain" />
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <h5 className="text-sm font-bold text-gray-900">Marketing Intern</h5>
+                              <p className="text-sm text-blue-600 font-semibold">Irving Oil • Saint John, NB</p>
+                            </div>
+                            <span className="text-xs text-gray-600 px-1.5 py-0.5 rounded">2018</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <span className="text-xs text-gray-600 px-1.5 py-0.5 rounded">2018</span>
+
+                    {/* Grant Thornton Tax Return Intern */}
+                    <div className="bg-white rounded-xl border border-gray-200 p-3 shadow-sm">
+                      <div className="flex gap-3">
+                        <div className="flex-shrink-0">
+                          <div className="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center border border-purple-200">
+                            <img src={grantThorntonLogo} alt="Grant Thornton" className="w-7 h-7 object-contain" />
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <h5 className="text-sm font-bold text-gray-900">Tax Return Intern</h5>
+                              <p className="text-sm text-blue-600 font-semibold">Grant Thornton LLP • Saint John, NB</p>
+                            </div>
+                            <span className="text-xs text-gray-600 px-1.5 py-0.5 rounded">2018</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -524,68 +587,59 @@ export default function Resume({ variation = null }: ResumeProps = {}) {
             <section id="community" className="mb-5 scroll-mt-24">
               <h3 className="text-base font-bold text-gray-900 mb-4 uppercase tracking-wide" style={{ letterSpacing: '0.05em' }}>Community Leadership</h3>
               
-              <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm ">
+              <div className="bg-white rounded-xl border border-gray-200 p-3 shadow-sm ">
                 <div className="flex gap-3">
                   <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-white rounded-lg shadow-sm flex items-center justify-center border border-red-200">
+                    <div className="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center border border-red-200">
                       <img src={unitedWayLogo} alt="United Way" className="w-7 h-7 object-contain" />
                     </div>
                   </div>
                   <div className="flex-1">
-                    <div className="flex justify-between items-start mb-3">
+                    <div className="flex justify-between items-start">
                       <div>
                         <h4 className="text-sm font-bold text-gray-900">Next Gen Ambassador</h4>
-                        <p className="text-sm text-blue-600 font-semibold">United Way • Kingston, ON</p>
+                        <p className="text-sm text-blue-600 font-semibold">United Way • Toronto, ON</p>
                       </div>
-                      <span className="text-xs text-gray-600 px-1.5 py-0.5 rounded">2020-2023</span>
+                      <span className="text-xs text-gray-600 px-1.5 py-0.5 rounded">2020-Present</span>
                     </div>
-                    <ul className="space-y-2">
-                      <li className="text-sm text-gray-700 flex items-start">
-                        <span className="text-blue-500 mr-2">•</span>
-                        <span>Led fundraising strategies, achieving 20% increase in funds raised over three years</span>
-                      </li>
-                      <li className="text-sm text-gray-700 flex items-start">
-                        <span className="text-blue-500 mr-2">•</span>
-                        <span>Spearheaded engagement initiatives, resulting in 15% rise in workplace participation</span>
-                      </li>
-                    </ul>
+                    
                   </div>
                 </div>
               </div>
 
               {/* Additional Community - Two Cards */}
               <div className="mt-3 grid grid-cols-2 gap-3">
-                <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm ">
-                  <div className="flex items-start gap-2">
+                <div className="bg-white rounded-xl border border-gray-200 p-3 shadow-sm ">
+                  <div className="flex gap-3">
                     <div className="flex-shrink-0">
-                      <div className="w-7 h-7 bg-white rounded flex items-center justify-center border border-gray-200">
-                        <img src={rbcLogo} alt="RBC" className="w-5 h-5 object-contain" />
+                      <div className="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center border border-blue-200">
+                        <img src={rbcLogo} alt="Royal Bank of Canada" className="w-7 h-7 object-contain" />
                       </div>
                     </div>
                     <div className="flex-1">
-                      <div className="flex justify-between items-start mb-1">
+                      <div className="flex justify-between items-start">
                         <h5 className="text-sm font-bold text-gray-900">Student Ambassador</h5>
                         <span className="text-xs text-gray-600 px-1.5 py-0.5 rounded">2019-2020</span>
                       </div>
                       <p className="text-sm text-blue-600 font-semibold">Royal Bank of Canada</p>
-                      <p className="text-sm text-gray-700 mt-1">Increased student engagement by 25% through campus events</p>
+                      <p className="text-sm text-gray-600">Fredericton, NB</p>
                     </div>
                   </div>
                 </div>
-                <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm ">
-                  <div className="flex items-start gap-2">
+                <div className="bg-white rounded-xl border border-gray-200 p-3 shadow-sm ">
+                  <div className="flex gap-3">
                     <div className="flex-shrink-0">
-                      <div className="w-7 h-7 bg-white rounded flex items-center justify-center border border-gray-200">
-                        <img src={irvingLogo} alt="Irving" className="w-5 h-5 object-contain" />
+                      <div className="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center border border-red-200">
+                        <img src={irvingLogo} alt="Irving" className="w-7 h-7 object-contain" />
                       </div>
                     </div>
                     <div className="flex-1">
-                      <div className="flex justify-between items-start mb-1">
+                      <div className="flex justify-between items-start">
                         <h5 className="text-sm font-bold text-gray-900">Volunteer Staff</h5>
                         <span className="text-xs text-gray-600 px-1.5 py-0.5 rounded">2018</span>
                       </div>
                       <p className="text-sm text-blue-600 font-semibold">Irving Oil Limited</p>
-                      <p className="text-sm text-gray-700 mt-1">Organized engaging activities for 100+ children at community events</p>
+                      <p className="text-sm text-gray-600">Saint John, NB</p>
                     </div>
                   </div>
                 </div>

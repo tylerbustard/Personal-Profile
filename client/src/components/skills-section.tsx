@@ -135,14 +135,16 @@ export default function CertificationsSection() {
     <section 
       ref={sectionAnimation.ref}
       id="certifications" 
-      className="py-20 sm:py-28 lg:py-36 relative overflow-hidden"
-      style={{ opacity: 1, visibility: 'visible' }}
+      className={`py-20 sm:py-28 lg:py-36 relative overflow-hidden scroll-fade-in ${sectionAnimation.isVisible ? 'visible' : ''}`}
     >
       {/* Background - inherits Apple grey from parent */}
       
       <div className="container-width">
         {/* Header - Outside the card */}
-        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+        <div 
+          ref={headerAnimation.ref}
+          className={`text-center mb-12 sm:mb-16 lg:mb-20 scroll-slide-up ${headerAnimation.isVisible ? 'visible' : ''}`}
+        >
           <h2 className="text-5xl lg:text-6xl font-bold text-foreground mb-6 tracking-tight" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>
             Certifications
           </h2>
@@ -159,8 +161,8 @@ export default function CertificationsSection() {
               <div 
                 key={categoryIndex} 
                 id={`certifications-${category.title.toLowerCase().replace(/[^a-z0-9]/g, '-')}`} 
-                className="relative overflow-hidden rounded-[20px] sm:rounded-[28px] bg-gradient-to-r from-gray-100/50 to-gray-200/50 backdrop-blur-sm border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-500"
-                style={{ opacity: 1, visibility: 'visible' }}
+                ref={categoryIndex === 0 ? certificationsRef : undefined}
+                className={`relative overflow-hidden rounded-[20px] sm:rounded-[28px] bg-gradient-to-r from-gray-100/50 to-gray-200/50 backdrop-blur-sm border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-500 scroll-scale-in scroll-stagger-${categoryIndex + 1} ${visibleItems.has(categoryIndex) ? 'visible' : ''}`}
               >
                 <div className="absolute inset-0 bg-white/85" />
                 <div className="relative p-6 sm:p-8 lg:p-10">
@@ -298,15 +300,12 @@ export function CommunitySection() {
     {
       title: "Next Gen Ambassador",
       organization: "United Way",
-      period: "2020-2023",
-      duration: "3 years",
-      location: "Kingston, Ontario",
-      description: "Led workplace fundraising and engagement initiatives for United Way's Next Generation programs",
-      achievements: [
-        "Led implementation of fundraising strategies achieving 20% increase in funds raised over three years",
-        "Spearheaded engagement initiatives resulting in 15% rise in participation and awareness within workplace community"
-      ],
-      skills: ["Fundraising Strategy", "Leadership", "Event Planning", "Community Engagement", "Stakeholder Management"],
+      period: "2020-Present",
+      duration: "4+ years",
+      location: "Toronto, Ontario",
+      description: "",
+      achievements: [],
+      skills: [],
       logoSrc: unitedWayLogo,
       color: "#FF5A28"
     },
@@ -316,12 +315,9 @@ export function CommunitySection() {
       period: "2019-2020",
       duration: "1 year",
       location: "Fredericton, New Brunswick",
-      description: "Campus representative focused on student engagement and brand awareness initiatives",
-      achievements: [
-        "Organized and executed campus-wide events resulting in 25% increase in student engagement and awareness",
-        "Developed targeted outreach strategy achieving 30% increase in student participation in RBC-sponsored events"
-      ],
-      skills: ["Event Management", "Strategic Outreach", "Campus Relations", "Brand Promotion", "Student Engagement"],
+      description: "",
+      achievements: [],
+      skills: [],
       logoSrc: rbcLogo,
       color: "#005DAA"
     },
@@ -331,12 +327,9 @@ export function CommunitySection() {
       period: "2018",
       duration: "Seasonal",
       location: "Saint John, New Brunswick",
-      description: "Community event volunteer supporting local youth engagement and corporate social responsibility initiatives",
-      achievements: [
-        "Successfully organized and executed engaging activities for over 100 children ensuring safe and enjoyable experience",
-        "Demonstrated leadership through collaboration with fellow volunteers for well-coordinated event execution"
-      ],
-      skills: ["Youth Engagement", "Event Coordination", "Team Collaboration", "Community Relations", "Safety Management"],
+      description: "",
+      achievements: [],
+      skills: [],
       logoSrc: irvingLogo,
       color: "#1E40AF"
     }
@@ -346,14 +339,16 @@ export function CommunitySection() {
     <section 
       ref={communityAnimation.ref}
       id="community" 
-      className="py-16 sm:py-24 lg:py-32 relative overflow-hidden"
-      style={{ opacity: 1, visibility: 'visible' }}
+      className={`py-16 sm:py-24 lg:py-32 relative overflow-hidden scroll-fade-in ${communityAnimation.isVisible ? 'visible' : ''}`}
     >
       {/* Background - inherits Apple grey from parent */}
       
       <div className="container-width">
         {/* Header - Outside the card */}
-        <div className="text-center mb-8 sm:mb-10 lg:mb-12">
+        <div 
+          ref={communityHeaderAnimation.ref}
+          className={`text-center mb-8 sm:mb-10 lg:mb-12 scroll-slide-up ${communityHeaderAnimation.isVisible ? 'visible' : ''}`}
+        >
           <h2 className="text-5xl lg:text-6xl font-bold text-foreground mb-6 tracking-tight">
             Community
           </h2>
@@ -374,8 +369,8 @@ export function CommunitySection() {
               <div 
                 key={index} 
                 id={`community-${activity.organization.toLowerCase().replace(/[^a-z0-9]/g, '-')}`} 
-                className="relative"
-                style={{ opacity: 1, visibility: 'visible' }}
+                ref={index === 0 ? communityRef : undefined}
+                className={`relative scroll-scale-in scroll-stagger-${index + 1} ${communityItems.has(index) ? 'visible' : ''}`}
                 data-testid={`community-activity-${index}`}
               >
                 {/* Beautiful Timeline Marker */}
@@ -389,78 +384,30 @@ export function CommunitySection() {
                   <div className="relative bg-white/90 backdrop-blur-xl rounded-2xl border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] group">
                     <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <div className="relative p-6 sm:p-8">
-                      {/* Header Section */}
-                      <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8 mb-4 sm:mb-6 text-center sm:text-left">
-                        {/* Logo on left */}
-                        <div className="w-20 h-20 sm:w-24 sm:h-24 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-110">
-                          {activity.logoSrc ? (
-                            <img 
-                              src={activity.logoSrc} 
-                              alt={`${activity.organization} Logo`} 
-                              className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
-                            />
-                          ) : activity.icon ? (
-                            <activity.icon className="w-12 h-12 sm:w-16 sm:h-16 text-foreground" />
-                          ) : null}
+                      {/* Header Section - Resume Page Style */}
+                      <div className="flex gap-3">
+                        <div className="flex-shrink-0">
+                          <div className="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center border border-gray-200">
+                            {activity.logoSrc ? (
+                              <img 
+                                src={activity.logoSrc} 
+                                alt={`${activity.organization} Logo`} 
+                                className="w-7 h-7 object-contain"
+                              />
+                            ) : activity.icon ? (
+                              <activity.icon className="w-7 h-7 text-foreground" />
+                            ) : null}
+                          </div>
                         </div>
-                        
-                        {/* Content on right */}
                         <div className="flex-1">
-                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1 gap-0 sm:gap-0">
-                            <h3 className="text-xl font-bold text-foreground">
-                              {activity.title}
-                            </h3>
-                            <span className="hidden sm:block text-base font-medium text-gray-500">{activity.period}</span>
-                          </div>
-                          <div className="space-y-0">
-                            <p className="text-lg font-semibold text-primary">{activity.organization}</p>
-                            <p className="text-base text-muted-foreground">{activity.location}</p>
-                            <span className="block sm:hidden text-base font-medium text-gray-500">{activity.period}</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Key Achievements */}
-                      <div className="mb-6">
-                        <h4 className="font-semibold text-foreground mb-4">Key Achievements</h4>
-                        <div className="space-y-3">
-                          {activity.achievements.map((achievement, achievementIndex) => (
-                            <div key={achievementIndex} className="flex items-start gap-3">
-                              <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2.5 flex-shrink-0"></div>
-                              <p className="text-base text-muted-foreground font-medium leading-relaxed">{achievement}</p>
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <h3 className="text-sm font-bold text-gray-900">{activity.title}</h3>
+                              <p className="text-sm text-blue-600 font-semibold">{activity.organization}</p>
+                              <p className="text-sm text-gray-600">{activity.location}</p>
                             </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Skills Developed */}
-                      <div>
-                        <h4 className="font-semibold text-foreground mb-3">Core Competencies</h4>
-                        
-                        {/* Mobile version - Row format */}
-                        <div className="sm:hidden space-y-2">
-                          {activity.skills.map((skill, skillIndex) => (
-                            <div
-                              key={skillIndex}
-                              className="bg-primary/10 text-primary px-4 py-2 rounded-lg text-sm font-medium border border-primary/20 w-full text-center"
-                              data-testid={`skill-${index}-${skillIndex}`}
-                            >
-                              {skill}
-                            </div>
-                          ))}
-                        </div>
-                        
-                        {/* Desktop version - Wrap format */}
-                        <div className="hidden sm:flex flex-wrap gap-2">
-                          {activity.skills.map((skill, skillIndex) => (
-                            <span
-                              key={skillIndex}
-                              className="bg-primary/10 text-primary px-3 py-1.5 rounded-full text-sm font-medium hover:bg-primary/20 transition-colors duration-300"
-                              data-testid={`skill-${index}-${skillIndex}`}
-                            >
-                              {skill}
-                            </span>
-                          ))}
+                            <span className="text-xs text-gray-600 px-1.5 py-0.5 rounded">{activity.period}</span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -480,7 +427,7 @@ export function CommunitySection() {
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
                 <CommunityCounter 
-                  end={4} 
+                  end={6} 
                   suffix="+" 
                   label="Years of Service" 
                   className="text-foreground"

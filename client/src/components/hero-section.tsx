@@ -19,6 +19,7 @@ import wallStreetPrepLogo from "@assets/wall street prep_1755923720193.png";
 import trainingTheStreetLogo from "@assets/trainning the street_1755938972014.png";
 import etsLogo from "@assets/ETS_1755939510188.png";
 import unitedWayLogo from "@assets/United-Way-Logo_1755913265895.png";
+import fiscalAiLogo from "@assets/fiscal_ai_logo_new.png";
 
 export default function HeroSection() {
   const isPageLoaded = useInitialPageAnimation(400);
@@ -220,10 +221,18 @@ export default function HeroSection() {
                  }}
                  data-testid="card-education">
               <div className="flex items-center gap-4 mb-1">
-                <div className="w-12 h-12 bg-primary/10 group-hover:bg-blue-500/20 rounded-xl flex items-center justify-center relative transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
-                  <img src={unbLogo} alt="University of New Brunswick Education" className="w-6 h-6 object-contain transition-all duration-300 group-hover:scale-110" />
+                <div className="w-12 h-12 bg-primary/10 group-hover:bg-blue-500/20 rounded-xl flex items-center justify-center relative overflow-visible transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
+                  {/* Two education logos stacked */}
+                  <div className="flex relative group-hover:space-x-1 transition-all duration-300">
+                    <div className="w-6 h-6 bg-white rounded-full border-2 border-white shadow-md flex items-center justify-center relative z-30 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg">
+                      <img src={mcgillLogo} alt="McGill University Education" className="w-4 h-4 object-contain" />
+                    </div>
+                    <div className="w-6 h-6 bg-white rounded-full border-2 border-white shadow-md flex items-center justify-center relative z-20 -ml-2 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg">
+                      <img src={unbLogo} alt="University of New Brunswick Education" className="w-4 h-4 object-contain" />
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-lg font-semibold text-foreground group-hover:text-blue-600 transition-colors duration-300">Education</h3>
+                <h3 className="text-lg font-semibold text-foreground group-hover:text-blue-600 transition-all duration-300 group-hover:translate-x-2">Education</h3>
               </div>
               <p className="text-base text-muted-foreground group-hover:text-gray-700 leading-relaxed transition-colors duration-300">
                 Strategic business foundation with finance expertise
@@ -245,13 +254,13 @@ export default function HeroSection() {
                   {/* Three most recent experience logos stacked */}
                   <div className="flex relative group-hover:space-x-1 transition-all duration-300">
                     <div className="w-6 h-6 bg-white rounded-full border-2 border-white shadow-md flex items-center justify-center relative z-30 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg">
-                      <img src={bmoLogo} alt="BMO Bank of Montreal Financial Services" className="w-4 h-4 object-contain" />
+                      <img src={fiscalAiLogo} alt="Fiscal.ai Financial Technology" className="w-4 h-4 object-contain" />
                     </div>
                     <div className="w-6 h-6 bg-white rounded-full border-2 border-white shadow-md flex items-center justify-center relative z-20 -ml-2 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg">
-                      <img src={tdLogo} alt="TD Bank Financial Services" className="w-4 h-4 object-contain" />
+                      <img src={bmoLogo} alt="BMO Bank of Montreal Financial Services" className="w-4 h-4 object-contain" />
                     </div>
                     <div className="w-6 h-6 bg-white rounded-full border-2 border-white shadow-md flex items-center justify-center relative z-10 -ml-2 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg">
-                      <img src={rbcLogo} alt="Royal Bank of Canada" className="w-4 h-4 object-contain" />
+                      <img src={tdLogo} alt="TD Bank Financial Services" className="w-4 h-4 object-contain" />
                     </div>
                   </div>
                 </div>

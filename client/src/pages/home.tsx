@@ -54,8 +54,8 @@ export default function Home({ variation = null }: HomeProps = {}) {
     <div className="min-h-screen" style={{ backgroundColor: '#f5f5f7' }}>
       <Navigation variation={variation} />
       <HeroSection />
-      <EducationSection />
-      <ExperienceSection />
+      <EducationSection variation={variation} />
+      <ExperienceSection variation={variation} />
       <CertificationsSection />
       <CommunitySection />
       <ContactInfoSection />
