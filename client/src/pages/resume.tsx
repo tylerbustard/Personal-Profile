@@ -24,7 +24,6 @@ import bloombergLogo from "@assets/bloomberg_1755923720190.png";
 import wallStreetPrepLogo from "@assets/wall street prep_1755923720193.png";
 import courseraLogo from "@assets/Coursera_1755937682843.png";
 import mcgillLogo from "@assets/mcgill_1755937693386.png";
-import fiscalAiLogo from "@assets/fiscal_ai_logo_new.png";
 
 interface ResumeProps {
   variation?: 'universityoftoronto' | 'queensuniversity' | 'profile' | null;
@@ -175,7 +174,7 @@ export default function Resume({ variation = null }: ResumeProps = {}) {
 
               {/* Row 2: Contact chips */}
               <div id="contact" className="mt-3 flex flex-wrap items-center gap-2 text-xs">
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gray-50 text-gray-700 border border-gray-200"><Mail className="w-3 h-3 text-blue-500" /> tbustard@unb.ca</span>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gray-50 text-gray-700 border border-gray-200"><Mail className="w-3 h-3 text-blue-500" /> tylerbustard@hotmail.com</span>
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gray-50 text-gray-700 border border-gray-200"><Phone className="w-3 h-3 text-blue-500" /> +1 (613) 985-1223</span>
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gray-50 text-gray-700 border border-gray-200"><Globe className="w-3 h-3 text-blue-500" /> tylerbustard.ca</span>
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gray-50 text-gray-700 border border-gray-200"><MapPin className="w-3 h-3 text-blue-500" /> Toronto, Ontario</span>
@@ -194,43 +193,6 @@ export default function Resume({ variation = null }: ResumeProps = {}) {
               <h3 className="text-base font-bold text-gray-900 mb-4 uppercase tracking-wide" style={{ letterSpacing: '0.05em' }}>Education</h3>
               
               <div className="space-y-4">
-                {/* McGill University - Profile Variation Only */}
-                {variation === 'profile' && (
-                  <div className="bg-white rounded-xl border border-gray-200 p-3 shadow-sm">
-                    <div className="flex gap-3 items-center">
-                      <div className="flex-shrink-0">
-                        <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center border border-red-200">
-                          <img src={mcgillLogo} alt="McGill" className="w-7 h-7 object-contain" />
-                        </div>
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <h4 className="text-sm font-bold text-gray-900">Master of Management in Finance Candidate</h4>
-                            <p className="text-sm text-gray-900 font-semibold">Desautels Faculty of Management</p>
-                            <p className="text-sm text-blue-600 font-semibold">McGill University</p>
-                          </div>
-                          <span className="inline-flex items-center rounded-full bg-gray-100 text-gray-600 text-xs font-medium px-2.5 py-1 shadow-sm">2025-2026</span>
-                        </div>
-                      </div>
-                    </div>
-                    <ul className="mt-3 space-y-2 pl-16">
-                      <li className="text-sm text-gray-700 flex items-start">
-                        <span className="text-red-500 mr-2">•</span>
-                        <span>Head of Risk Management - Desautels Capital Management Fund</span>
-                      </li>
-                      <li className="text-sm text-gray-700 flex items-start">
-                        <span className="text-red-500 mr-2">•</span>
-                        <span>Chief Sustainability Officer - DCM Socially Responsible Investing Fund</span>
-                      </li>
-                      <li className="text-sm text-gray-700 flex items-start">
-                        <span className="text-red-500 mr-2">•</span>
-                        <span>Recipient of 2 Scholarships for academic merit and leadership skills, Total $13,000</span>
-                      </li>
-                    </ul>
-                  </div>
-                )}
-
                 {/* University of New Brunswick */}
                 <div id="experience-fiscal-ai-equity-analyst" className="bg-white rounded-xl border border-gray-200 p-3 shadow-sm">
                   <div className="flex gap-3 items-center">
@@ -273,43 +235,7 @@ export default function Resume({ variation = null }: ResumeProps = {}) {
               <h3 className="text-base font-bold text-gray-900 mb-4 uppercase tracking-wide" style={{ letterSpacing: '0.05em' }}>Professional Experience</h3>
               
               <div className="space-y-4">
-                {/* Current Role - Fiscal.ai */}
-                <div id="experience-bmo-private-wealth-portfolio-assistant" className="bg-white rounded-xl border border-gray-200 p-3 shadow-sm">
-                  <div className="flex gap-3 items-center">
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center border border-gray-200">
-                        <img src={fiscalAiLogo} alt="Fiscal.ai" className="w-7 h-7 object-contain" />
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <h4 className="text-sm font-bold text-gray-900">Equity Analyst</h4>
-                          <p className="text-sm text-blue-600 font-semibold">Fiscal.ai</p>
-                          <p className="text-sm text-gray-600">Toronto, ON</p>
-                        </div>
-                        <span className="inline-flex items-center rounded-full bg-gray-100 text-gray-600 text-xs font-medium px-2.5 py-1 shadow-sm">2023-Present</span>
-                      </div>
-                    </div>
-                  </div>
-                  <ul className="mt-3 space-y-2 pl-16">
-                    <li className="text-sm text-gray-700 flex items-start">
-                      <span className="text-blue-500 mr-2">•</span>
-                      <span>Analyze and compile public company financial statements, cutting reporting turnaround by 13%</span>
-                    </li>
-                    <li className="text-sm text-gray-700 flex items-start">
-                      <span className="text-blue-500 mr-2">•</span>
-                      <span>Collaborate with product and engineering to implement AI-driven data features, boosting adoption by 12%</span>
-                    </li>
-                  </ul>
-                  <div className="mt-2 pl-16 flex flex-wrap gap-2">
-                    {['Financial Analysis', 'AI Integration', 'Data Analytics', 'Python', 'SQL'].map((skill) => (
-                      <span key={skill} className="inline-block px-2.5 py-1 rounded-lg bg-blue-50 text-blue-600 border border-blue-200 text-xs font-semibold">
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                {/* Current Role - removed Equity Analyst (Fiscal.ai) */}
 
                 {/* BMO Private Wealth */}
                 <div className="bg-white rounded-xl border border-gray-200 p-3 shadow-sm">
@@ -342,7 +268,7 @@ export default function Resume({ variation = null }: ResumeProps = {}) {
                   </ul>
                   <div className="mt-2 pl-16 flex flex-wrap gap-2">
                     {['Portfolio Management', 'Client Relations', 'Financial Analysis', 'Excel'].map((skill) => (
-                      <span key={skill} className="inline-block px-2.5 py-1 rounded-lg bg-blue-50 text-blue-600 border border-blue-200 text-xs font-semibold">
+                      <span key={skill} className="inline-block px-2.5 py-1 rounded-lg bg-red-50 text-red-700 border border-red-200 text-xs font-semibold">
                         {skill}
                       </span>
                     ))}
@@ -352,7 +278,7 @@ export default function Resume({ variation = null }: ResumeProps = {}) {
                 {/* Early Career Experience */}
                 <div>
                   <h4 className="text-sm font-bold text-gray-900 mb-3 uppercase tracking-wide" style={{ letterSpacing: '0.05em' }}>Early Career Experience</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 gap-3">
                     {/* TD Canada Trust */}
                     <div id="experience-td-canada-trust-financial-advisor" className="bg-white rounded-xl border border-gray-200 p-3 shadow-sm">
                       <div className="flex gap-3 items-center">
@@ -371,6 +297,23 @@ export default function Resume({ variation = null }: ResumeProps = {}) {
                             <span className="inline-flex items-center rounded-full bg-gray-100 text-gray-600 text-xs font-medium px-2.5 py-1 shadow-sm">2021-2022</span>
                           </div>
                         </div>
+                      </div>
+                      <ul className="mt-3 space-y-2 pl-16">
+                        <li className="text-sm text-gray-700 flex items-start">
+                          <span className="text-green-500 mr-2">•</span>
+                          <span>Cultivated strong client relationships by assessing individual financial needs, resulting in an 11% increase in sales</span>
+                        </li>
+                        <li className="text-sm text-gray-700 flex items-start">
+                          <span className="text-green-500 mr-2">•</span>
+                          <span>Exceeded sales targets, achieving a top 15% performance ranking within the district</span>
+                        </li>
+                      </ul>
+                      <div className="mt-2 pl-16 flex flex-wrap gap-2">
+                        {["Financial Planning", "Sales", "Client Advisory", "Product Knowledge"].map((skill) => (
+                          <span key={skill} className="inline-block px-2.5 py-1 rounded-lg bg-green-50 text-green-700 border border-green-200 text-xs font-semibold">
+                            {skill}
+                          </span>
+                        ))}
                       </div>
                     </div>
 
@@ -392,6 +335,23 @@ export default function Resume({ variation = null }: ResumeProps = {}) {
                             <span className="inline-flex items-center rounded-full bg-gray-100 text-gray-600 text-xs font-medium px-2.5 py-1 shadow-sm">2020-2021</span>
                           </div>
                         </div>
+                      </div>
+                      <ul className="mt-3 space-y-2 pl-16">
+                        <li className="text-sm text-gray-700 flex items-start">
+                          <span className="text-blue-500 mr-2">•</span>
+                          <span>Strengthened client relationships by advising on personalized solutions, increased repeat transactions by 13%</span>
+                        </li>
+                        <li className="text-sm text-gray-700 flex items-start">
+                          <span className="text-blue-500 mr-2">•</span>
+                          <span>Excelled in needs-based advising, boosting adoption of core products like GICs, mutual funds, and TFSAs by 8%</span>
+                        </li>
+                      </ul>
+                      <div className="mt-2 pl-16 flex flex-wrap gap-2">
+                        {["Banking Products", "Financial Advisory", "Client Relationship Management", "Digital Banking"].map((skill) => (
+                          <span key={skill} className="inline-block px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 text-xs font-semibold">
+                            {skill}
+                          </span>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -776,7 +736,7 @@ export default function Resume({ variation = null }: ResumeProps = {}) {
         <div className="container mx-auto px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-white/90 font-medium">
-              © {new Date().getFullYear()} Tyler Bustard. All rights reserved.
+              © Tyler Bustard. All rights reserved.
             </p>
             <button
               onClick={() => {

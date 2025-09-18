@@ -349,20 +349,7 @@ export default function Navigation({ variation = null }: NavigationProps = {}) {
                           onMouseLeave={handleDropdownContentLeave}
                         >
                           <div className="space-y-3">
-                            {/* McGill University (Resume: scroll to top of Education) */}
-                            <button 
-                              onClick={() => {
-                                scrollToSection('#education');
-                                setOpenDropdown(null);
-                              }}
-                              className="w-full text-left hover:bg-gray-100/50 rounded-lg p-3 transition-all duration-200 group"
-                            >
-                              <div className="space-y-1">
-                                <div className="text-sm font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-200">McGill University</div>
-                                <div className="text-xs text-gray-600">Desautels Faculty of Management</div>
-                                <div className="text-xs text-gray-500">Master of Management in Finance Candidate</div>
-                              </div>
-                            </button>
+                            {/* McGill University removed from resume dropdown */}
                             
                             {/* University of New Brunswick (Resume: scroll to top of Education) */}
                             <button 
@@ -419,19 +406,7 @@ export default function Navigation({ variation = null }: NavigationProps = {}) {
                           onMouseLeave={handleDropdownContentLeave}
                         >
                           <div className="space-y-3">
-                            {/* Equity Analyst */}
-                            <button 
-                              onClick={() => {
-                                scrollToSection('#experience-fiscal-ai-equity-analyst');
-                                setOpenDropdown(null);
-                              }}
-                              className="w-full text-left hover:bg-gray-100/50 rounded-lg p-3 transition-all duration-200 group"
-                            >
-                              <div className="space-y-1">
-                                <div className="text-sm font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-200">Equity Analyst</div>
-                                <div className="text-xs text-gray-600">Fiscal.ai</div>
-                              </div>
-                            </button>
+                            {/* Equity Analyst - removed from resume dropdown */}
 
                             {/* Portfolio Assistant */}
                             <button 
@@ -756,7 +731,7 @@ export default function Navigation({ variation = null }: NavigationProps = {}) {
                             >
                               <div className="space-y-1">
                                 <div className="text-sm font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-200">Email</div>
-                <div className="text-xs text-gray-600">tbustard@unb.ca</div>
+                <div className="text-xs text-gray-600">tylerbustard@hotmail.com</div>
                               </div>
                             </button>
 
@@ -832,20 +807,7 @@ export default function Navigation({ variation = null }: NavigationProps = {}) {
                         onMouseLeave={handleDropdownContentLeave}
                       >
                         <div className="space-y-3">
-                          {/* McGill University */}
-                          <button 
-                            onClick={() => {
-                              scrollToSection('#mcgill-education');
-                              setOpenDropdown(null);
-                            }}
-                            className="w-full text-left hover:bg-gray-100/50 rounded-lg p-3 transition-all duration-200 group"
-                          >
-                            <div className="space-y-1">
-                              <div className="text-sm font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-200">McGill University</div>
-                              <div className="text-xs text-gray-600">Desautels Faculty of Management</div>
-                              <div className="text-xs text-gray-500">Master of Management in Finance Candidate</div>
-                            </div>
-                          </button>
+                          {/* McGill University - removed from homepage */}
                           
                           {/* University of New Brunswick */}
                           <button 
@@ -904,19 +866,7 @@ export default function Navigation({ variation = null }: NavigationProps = {}) {
                         onMouseLeave={handleDropdownLeave}
                       >
                         <div className="space-y-2 max-h-96 overflow-y-auto">
-                          {/* Equity Analyst */}
-                          <button 
-                            onClick={() => {
-                              scrollToSection('#experience-fiscal-ai-equity-analyst');
-                              setOpenDropdown(null);
-                            }}
-                            className="w-full text-left hover:bg-gray-100/50 rounded-lg p-3 transition-all duration-200 group"
-                          >
-                            <div className="space-y-1">
-                              <div className="text-sm font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-200">Equity Analyst</div>
-                              <div className="text-xs text-gray-600">Fiscal.ai</div>
-                            </div>
-                          </button>
+                          {/* Equity Analyst - removed from homepage dropdown */}
                           
                           {/* Portfolio Assistant */}
                           <button 
@@ -1463,7 +1413,7 @@ export default function Navigation({ variation = null }: NavigationProps = {}) {
                           >
                             <div className="space-y-1">
                               <div className="text-sm font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-200">Email</div>
-                              <div className="text-xs text-gray-600">tbustard@unb.ca</div>
+                              <div className="text-xs text-gray-600">tylerbustard@hotmail.com</div>
                             </div>
                           </button>
 

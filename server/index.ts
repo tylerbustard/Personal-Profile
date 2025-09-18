@@ -84,7 +84,7 @@ app.use((req, res, next) => {
         const { storage } = await import('./storage');
         await storage.upsertUser({
           id: 'tylerbustard',
-          email: 'tyler@tylerbustard.ca',
+          email: 'tylerbustard@hotmail.com',
           firstName: 'Tyler',
           lastName: 'Bustard',
         });

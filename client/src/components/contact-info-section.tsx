@@ -7,7 +7,7 @@ export default function ContactInfoSection() {
   const headerAnimation = useScrollAnimation({ threshold: 0.25, triggerOnce: true, delay: 100 });
   const { ref: contactRef, visibleItems } = useStaggeredScrollAnimation(3, { threshold: 0.15, triggerOnce: true, delay: 200 });
   const contactInfo = [
-  { icon: HiOutlineMail, label: "Email", value: "tbustard@unb.ca" },
+  { icon: HiOutlineMail, label: "Email", value: "tylerbustard@hotmail.com" },
     { icon: HiOutlinePhone, label: "Phone", value: "(613) 985-1223" },
     { icon: HiOutlineLocationMarker, label: "Location", value: "Toronto, Ontario, Canada" },
   ];

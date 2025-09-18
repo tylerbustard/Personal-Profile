@@ -153,26 +153,8 @@ export default function ExperienceSection({ variation = null }: ExperienceSectio
     },
   ];
 
-  // Profile-specific experience for Fiscal.ai
-  const fiscalAiExperience: Experience = {
-    title: "Equity Analyst",
-    company: "Fiscal.ai",
-    location: "Toronto, Ontario",
-    period: "2023-Present",
-    duration: "2+ years",
-    achievements: [
-      "Analyze and compile public company financial statements, cutting reporting turnaround by 13%",
-      "Collaborate with product and engineering to implement AI-driven data features, boosting adoption by 12%",
-    ],
-    technologies: ["Financial Analysis", "AI Integration", "Data Analytics", "Python", "SQL"],
-    logoSrc: fiscalAiLogo,
-    color: "#6366F1"
-  };
-
-  // Create final experiences array based on variation
-  const experiences: Experience[] = variation === 'profile' 
-    ? [fiscalAiExperience, ...baseExperiences]
-    : baseExperiences;
+  // Create final experiences array (remove Fiscal.ai from homepage)
+  const experiences: Experience[] = baseExperiences;
 
   return (
     <section 

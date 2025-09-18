@@ -105,7 +105,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         const user = {
           id: 'tylerbustard',
           username: 'tylerbustard',
-          email: 'tyler@tylerbustard.ca'
+          email: 'tylerbustard@hotmail.com'
         };
         
         // Set up server session for authentication

@@ -91,7 +91,7 @@ export default function Home({ variation = null }: HomeProps = {}) {
         <div className="container mx-auto px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-white/90 font-medium">
-              © {new Date().getFullYear()} Tyler Bustard. All rights reserved.
+              © Tyler Bustard. All rights reserved.
             </p>
             <button
               onClick={() => {

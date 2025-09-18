@@ -95,10 +95,8 @@ export default function EducationSection({ variation = null }: EducationSectionP
     ]
   };
 
-  // Create education array based on variation
-  const educationEntries = variation === 'profile' 
-    ? [queensEducation, unbEducation]
-    : [unbEducation];
+  // Create education array (homepage should only show UNB)
+  const educationEntries = [unbEducation];
 
   const highlights = [
     { title: "$47,500", subtitle: "Total Scholarships & Awards", iconType: "award" },
@@ -477,7 +475,7 @@ export default function EducationSection({ variation = null }: EducationSectionP
               key={index}
               id={education.institution.includes('Desautels') ? 'mcgill-education' : 'unb-education'}
               ref={index === 0 ? heroCardAnimation.ref : undefined}
-              className={`bg-gradient-to-br from-white/95 to-white/90 backdrop-blur-xl rounded-[24px] sm:rounded-[32px] p-8 sm:p-10 lg:p-12 border border-white/30 shadow-2xl hover:shadow-3xl transition-all duration-500 relative overflow-hidden group ${index === 0 ? `scroll-scale-in scroll-stagger-${index + 1} ${heroCardAnimation.isVisible ? 'visible' : ''}` : 'visible'}`}
+              className={`bg-gradient-to-br from-white/95 to-white/90 backdrop-blur-xl rounded-[24px] sm:rounded-[32px] p-8 sm:p-10 lg:p-12 border border-white/30 shadow-2xl hover:shadow-3xl transition-all duration-500 relative overflow-hidden group ${index === 0 ? `scroll-scale-in scroll-stagger-${index + 1} visible` : 'visible'}`}
           >
               {/* Education Header */}
               <div className="mb-12 sm:mb-16 lg:mb-20">
@@ -794,9 +792,9 @@ export default function EducationSection({ variation = null }: EducationSectionP
                           </h3>
                           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
                             <EducationCounter 
-                              end={13000} 
+                              end={47500} 
                               prefix="$" 
-                              label="Total MMF Scholarships & Awards" 
+                              label="Total Scholarships & Awards" 
                               className="text-foreground"
                               delay={0}
                             />
@@ -808,8 +806,8 @@ export default function EducationSection({ variation = null }: EducationSectionP
                               delay={200}
                             />
                             <EducationCounter 
-                              end={15} 
-                              label="ESG Investment Assessments Conducted" 
+                              end={40} 
+                              label="Total Courses Completed" 
                               className="text-blue-600"
                               delay={400}
                             />
@@ -1177,7 +1175,7 @@ export default function EducationSection({ variation = null }: EducationSectionP
                       <div className="bg-white/90 backdrop-blur-xl rounded-[28px] border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-500 overflow-hidden">
                         <div className="bg-gradient-to-r from-gray-100/50 to-gray-200/50 p-8 lg:p-12">
                           <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-12 text-center">
-                            UNB Highlights
+                            Education Highlights
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
                 <EducationCounter 
