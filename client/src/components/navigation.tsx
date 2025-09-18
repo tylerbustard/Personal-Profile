@@ -4,17 +4,12 @@ import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import profileImage from "@assets/Untitled design (1)_1755896187722.png";
 
-interface NavigationProps {
-  variation?: 'universityoftoronto' | 'queensuniversity' | 'profile' | null;
-}
-
-export default function Navigation({ variation = null }: NavigationProps = {}) {
+export default function Navigation() {
   const [location] = useLocation();
-  const basePath = variation ? `/${variation}` : '';
-  const isHomePage = location === '/' || location === `/${variation}`;
-  const isResumePage = location === '/resume' || location === `${basePath}/resume`;
-  const isUploadPage = location === '/upload' || location === `${basePath}/upload`;
-  const isSignInPage = location === '/sign-in' || location === `${basePath}/sign-in`;
+  const isHomePage = location === '/';
+  const isResumePage = location === '/resume';
+  const isUploadPage = location === '/upload';
+  const isSignInPage = location === '/sign-in';
   
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
@@ -214,7 +209,7 @@ export default function Navigation({ variation = null }: NavigationProps = {}) {
     
     // If not on home page, navigate to home page first
     if (!isHomePage) {
-      window.location.href = `${basePath}${href}`;
+      window.location.href = href;
       return;
     }
     
@@ -290,7 +285,7 @@ export default function Navigation({ variation = null }: NavigationProps = {}) {
                 <button 
                   onClick={() => {
                     // Always go to home page, not back in history
-                    window.location.href = basePath || '/';
+                    window.location.href = '/';
                   }}
                   className="flex items-center space-x-4 transition-all duration-300 hover:scale-105 cursor-pointer"
                 >
@@ -1462,12 +1457,12 @@ export default function Navigation({ variation = null }: NavigationProps = {}) {
                   onClick={() => {
                     if (isResumePage) {
                       // Always go to home page, not back in history
-                      window.location.href = basePath || '/';
+                      window.location.href = '/';
                     } else if (isUploadPage || isSignInPage) {
                       // Go to home page for upload-resume and sign-in pages
-                      window.location.href = basePath || '/';
+                      window.location.href = '/';
                       } else {
-                      window.location.href = `${basePath}/resume`;
+                      window.location.href = '/resume';
                     }
                   }}
                   className="px-4 py-2 text-sm font-medium rounded-lg bg-gray-900 text-white hover:bg-gray-800 transition-all duration-200 hover:scale-105 shadow-sm"
@@ -1481,7 +1476,7 @@ export default function Navigation({ variation = null }: NavigationProps = {}) {
                 <button
                   onClick={() => {
                     // Always go to home page, not back in history
-                    window.location.href = basePath || '/';
+                    window.location.href = '/';
                   }}
                   className="lg:hidden p-2 rounded-lg hover:bg-gray-100/50 transition-all duration-200 active:scale-95"
                   aria-label={isResumePage ? "Close resume" : "Go to home"}
@@ -1588,12 +1583,12 @@ export default function Navigation({ variation = null }: NavigationProps = {}) {
                   onClick={() => {
                     if (isResumePage) {
                       // Always go to home page, not back in history
-                      window.location.href = basePath || '/';
+                      window.location.href = '/';
                     } else if (isUploadPage || isSignInPage) {
                       // Go to home page for upload-resume and sign-in pages
-                      window.location.href = basePath || '/';
+                      window.location.href = '/';
                       } else {
-                      window.location.href = `${basePath}/resume`;
+                      window.location.href = '/resume';
                     }
                     setIsMobileMenuOpen(false);
                   }}

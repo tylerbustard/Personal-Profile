@@ -20,11 +20,7 @@ import wallStreetPrepLogo from "@assets/wall street prep_1755923720193.png";
 import courseraLogo from "@assets/Coursera_1755937682843.png";
 import mcgillLogo from "@assets/mcgill_1755937693386.png";
 
-interface ResumeVariation2Props {
-  variation?: 'universityoftoronto' | 'queensuniversity' | 'profile' | null;
-}
-
-export default function ResumeVariation2({ variation = null }: ResumeVariation2Props = {}) {
+export default function ResumeVariation2() {
   const isPageLoaded = useInitialPageAnimation(400);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
 

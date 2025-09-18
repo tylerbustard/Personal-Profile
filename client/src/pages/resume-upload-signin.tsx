@@ -8,11 +8,7 @@ import { Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { useSimpleAuth } from "@/hooks/useSimpleAuth";
 
-interface ResumeUploadSignInProps {
-  variation?: 'universityoftoronto' | 'queensuniversity' | 'profile' | null;
-}
-
-export default function ResumeUploadSignIn({ variation = null }: ResumeUploadSignInProps = {}) {
+export default function ResumeUploadSignIn() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -28,19 +24,17 @@ export default function ResumeUploadSignIn({ variation = null }: ResumeUploadSig
     if (storedPreviousPage) {
       setPreviousPage(storedPreviousPage);
     } else {
-      // Default to home page for the current variation
-      const basePath = variation ? `/${variation}` : '';
-      setPreviousPage(`${basePath}/`);
+      // Default to home page
+      setPreviousPage('/');
     }
-  }, [variation]);
+  }, []);
 
   const handleBack = () => {
     if (previousPage && previousPage !== '/sign-in') {
       setLocation(previousPage);
     } else {
-      // Fallback to home page for current variation
-      const basePath = variation ? `/${variation}` : '';
-      setLocation(`${basePath}/`);
+      // Fallback to home page
+      setLocation('/');
     }
   };
 
@@ -57,9 +51,8 @@ export default function ResumeUploadSignIn({ variation = null }: ResumeUploadSig
       });
       // Clear the previous page from localStorage
       localStorage.removeItem('previousPage');
-      // Navigate to the appropriate upload page based on variation
-      const basePath = variation ? `/${variation}` : '';
-      setLocation(`${basePath}/upload`);
+      // Navigate to the upload page
+      setLocation('/upload');
     } else {
       toast({
         title: "Login Failed",

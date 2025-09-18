@@ -25,11 +25,7 @@ import wallStreetPrepLogo from "@assets/wall street prep_1755923720193.png";
 import courseraLogo from "@assets/Coursera_1755937682843.png";
 import mcgillLogo from "@assets/mcgill_1755937693386.png";
 
-interface ResumeProps {
-  variation?: 'universityoftoronto' | 'queensuniversity' | 'profile' | null;
-}
-
-export default function Resume({ variation = null }: ResumeProps = {}) {
+export default function Resume() {
   const [location] = useLocation();
   const [showScrollToTop, setShowScrollToTop] = useState(false);
   
@@ -72,7 +68,7 @@ export default function Resume({ variation = null }: ResumeProps = {}) {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#f5f5f7' }}>
-      <Navigation variation={variation} />
+      <Navigation />
 
       {/* Print PDF Button - Only show if PDFs exist */}
       {resumesQuery.data && Array.isArray(resumesQuery.data) && resumesQuery.data.length > 0 ? (
@@ -740,9 +736,8 @@ export default function Resume({ variation = null }: ResumeProps = {}) {
             </p>
             <button
               onClick={() => {
-                const basePath = variation ? `/${variation}` : '';
                 localStorage.setItem('previousPage', location);
-                window.location.href = `${basePath}/sign-in`;
+                window.location.href = '/sign-in';
               }}
               className="px-4 py-2 text-sm font-medium rounded-lg bg-white/10  border border-white/20  text-white  "
               data-testid="footer-employer-signin"

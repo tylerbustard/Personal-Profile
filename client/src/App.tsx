@@ -13,27 +13,13 @@ import ResumeVariation3 from "@/pages/resume-variation-3";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { useGlobalAnimations } from "@/hooks/useGlobalAnimations";
 
-// Create a wrapper component that handles subdirectory routing
-function SubdirectoryRouter() {
-  const [location] = useLocation();
-  
-  // Extract the subdirectory from the path
-  const pathParts = location.split('/').filter(Boolean);
-  const subdirectory = pathParts[0] === 'universityoftoronto' || pathParts[0] === 'queensuniversity' || pathParts[0] === 'profile' ? pathParts[0] : null;
-  const remainingPath = subdirectory ? '/' + pathParts.slice(1).join('/') : location;
-  
-  // If we're at a subdirectory root, redirect to home
-  if (subdirectory && remainingPath === '/') {
-    return <Home variation={subdirectory} />;
-  }
-
+function Router() {
   return (
     <Switch>
-      {/* Root paths now use the profile variation by default */}
-      <Route path="/" component={() => <Home variation="profile" />} />
-      <Route path="/resume" component={() => <Resume variation="profile" />} />
-      <Route path="/upload" component={() => <UploadResumeDashboard />} />
-      <Route path="/sign-in" component={() => <ResumeUploadSignIn />} />
+      <Route path="/" component={Home} />
+      <Route path="/resume" component={Resume} />
+      <Route path="/upload" component={UploadResumeDashboard} />
+      <Route path="/sign-in" component={ResumeUploadSignIn} />
       <Route path="/resume-tech">
         <ProtectedRoute>
           <ResumeVariation1 />
@@ -50,75 +36,9 @@ function SubdirectoryRouter() {
         </ProtectedRoute>
       </Route>
       
-      {/* Legacy subdirectories redirect to main equivalents */}
-      <Route path="/universityoftoronto" component={() => <Home variation="profile" />} />
-      <Route path="/universityoftoronto/resume" component={() => <Resume variation="profile" />} />
-      <Route path="/universityoftoronto/upload" component={() => <UploadResumeDashboard variation="profile" />} />
-      <Route path="/universityoftoronto/sign-in" component={() => <ResumeUploadSignIn variation="profile" />} />
-      <Route path="/universityoftoronto/resume-tech">
-        <ProtectedRoute>
-          <ResumeVariation1 variation="profile" />
-        </ProtectedRoute>
-      </Route>
-      <Route path="/universityoftoronto/resume-finance">
-        <ProtectedRoute>
-          <ResumeVariation2 variation="profile" />
-        </ProtectedRoute>
-      </Route>
-      <Route path="/universityoftoronto/resume-leadership">
-        <ProtectedRoute>
-          <ResumeVariation3 variation="profile" />
-        </ProtectedRoute>
-      </Route>
-      
-      <Route path="/queensuniversity" component={() => <Home variation="profile" />} />
-      <Route path="/queensuniversity/resume" component={() => <Resume variation="profile" />} />
-      <Route path="/queensuniversity/upload" component={() => <UploadResumeDashboard variation="profile" />} />
-      <Route path="/queensuniversity/sign-in" component={() => <ResumeUploadSignIn variation="profile" />} />
-      <Route path="/queensuniversity/resume-tech">
-        <ProtectedRoute>
-          <ResumeVariation1 variation="profile" />
-        </ProtectedRoute>
-      </Route>
-      <Route path="/queensuniversity/resume-finance">
-        <ProtectedRoute>
-          <ResumeVariation2 variation="profile" />
-        </ProtectedRoute>
-      </Route>
-      <Route path="/queensuniversity/resume-leadership">
-        <ProtectedRoute>
-          <ResumeVariation3 variation="profile" />
-        </ProtectedRoute>
-      </Route>
-      
-      {/* Profile subdirectory (legacy) */}
-      <Route path="/profile" component={() => <Home variation="profile" />} />
-      <Route path="/profile/resume" component={() => <Resume variation="profile" />} />
-      <Route path="/profile/upload" component={() => <UploadResumeDashboard variation="profile" />} />
-      <Route path="/profile/sign-in" component={() => <ResumeUploadSignIn variation="profile" />} />
-      <Route path="/profile/resume-tech">
-        <ProtectedRoute>
-          <ResumeVariation1 variation="profile" />
-        </ProtectedRoute>
-      </Route>
-      <Route path="/profile/resume-finance">
-        <ProtectedRoute>
-          <ResumeVariation2 variation="profile" />
-        </ProtectedRoute>
-      </Route>
-      <Route path="/profile/resume-leadership">
-        <ProtectedRoute>
-          <ResumeVariation3 variation="profile" />
-        </ProtectedRoute>
-      </Route>
-      
       <Route>404: Page not found</Route>
     </Switch>
   );
-}
-
-function Router() {
-  return <SubdirectoryRouter />;
 }
 
 function App() {

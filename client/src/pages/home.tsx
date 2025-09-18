@@ -8,11 +8,7 @@ import ExperienceSection from "@/components/experience-section";
 import CertificationsSection, { CommunitySection } from "@/components/skills-section";
 import ContactInfoSection from "@/components/contact-info-section";
 
-interface HomeProps {
-  variation?: 'universityoftoronto' | 'queensuniversity' | 'profile' | null;
-}
-
-export default function Home({ variation = null }: HomeProps = {}) {
+export default function Home() {
   const [location] = useLocation();
   const [showScrollToTop, setShowScrollToTop] = useState(false);
 
@@ -52,10 +48,10 @@ export default function Home({ variation = null }: HomeProps = {}) {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#f5f5f7' }}>
-      <Navigation variation={variation} />
+      <Navigation />
       <HeroSection />
-      <EducationSection variation={variation} />
-      <ExperienceSection variation={variation} />
+      <EducationSection />
+      <ExperienceSection />
       <CertificationsSection />
       <CommunitySection />
       <ContactInfoSection />
@@ -95,9 +91,8 @@ export default function Home({ variation = null }: HomeProps = {}) {
             </p>
             <button
               onClick={() => {
-                const basePath = variation ? `/${variation}` : '';
                 localStorage.setItem('previousPage', location);
-                window.location.href = `${basePath}/sign-in`;
+                window.location.href = '/sign-in';
               }}
               className="px-4 py-2 text-sm font-medium rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/30 text-white transition-all duration-200 hover:scale-105"
               data-testid="footer-employer-signin"

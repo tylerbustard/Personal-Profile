@@ -12,11 +12,7 @@ import type { ResumeUpload } from "@shared/schema";
 import { useSimpleAuth } from "@/hooks/useSimpleAuth";
 import { Link, useLocation } from "wouter";
 
-interface UploadResumeDashboardProps {
-  variation?: 'universityoftoronto' | 'queensuniversity' | 'profile' | null;
-}
-
-export default function UploadResumeDashboard({ variation = null }: UploadResumeDashboardProps = {}) {
+export default function UploadResumeDashboard() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const { logout } = useSimpleAuth();
@@ -33,11 +29,10 @@ export default function UploadResumeDashboard({ variation = null }: UploadResume
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
       console.log('Not authenticated, redirecting to sign-in');
-      const basePath = variation ? `/${variation}` : '';
       localStorage.setItem('previousPage', location);
-      setLocation(`${basePath}/sign-in`);
+      setLocation('/sign-in');
     }
-  }, [isAuthenticated, isLoading, variation, location, setLocation]);
+  }, [isAuthenticated, isLoading, location, setLocation]);
 
   // Fetch existing uploads (real API)
   const { data: uploads = [], isLoading: uploadsLoading } = useQuery<ResumeUpload[]>({
@@ -346,7 +341,7 @@ export default function UploadResumeDashboard({ variation = null }: UploadResume
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#f8fafc" }}>
-      <Navigation variation={variation} />
+      <Navigation />
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
@@ -354,8 +349,7 @@ export default function UploadResumeDashboard({ variation = null }: UploadResume
           <Button 
             variant="ghost" 
             onClick={() => {
-              const basePath = variation ? `/${variation}` : '';
-              window.location.href = `${basePath}/resume`;
+              window.location.href = '/resume';
             }}
             className="text-gray-600 hover:text-gray-900 font-medium"
             data-testid="button-back"
@@ -423,8 +417,7 @@ export default function UploadResumeDashboard({ variation = null }: UploadResume
               variant="ghost" 
               onClick={() => {
                 logout();
-                const basePath = variation ? `/${variation}` : '';
-                setLocation(`${basePath}/`);
+                setLocation('/');
               }}
               data-testid="button-logout"
               className="text-gray-600 hover:text-gray-900 font-medium"

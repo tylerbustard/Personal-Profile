@@ -52,10 +52,9 @@ function CourseCounter() {
 }
 
 interface EducationSectionProps {
-  variation?: 'universityoftoronto' | 'queensuniversity' | 'profile' | null;
 }
 
-export default function EducationSection({ variation = null }: EducationSectionProps = {}) {
+export default function EducationSection() {
   const sectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true });
   const headerAnimation = useScrollAnimation({ threshold: 0.25, triggerOnce: true, delay: 100 });
   const heroCardAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true, delay: 200 });

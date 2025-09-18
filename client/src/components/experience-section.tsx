@@ -42,11 +42,7 @@ function CounterStat({ end, suffix = '', prefix = '', label, className = '', del
   );
 }
 
-interface ExperienceSectionProps {
-  variation?: 'universityoftoronto' | 'queensuniversity' | 'profile' | null;
-}
-
-export default function ExperienceSection({ variation = null }: ExperienceSectionProps = {}) {
+export default function ExperienceSection() {
   const sectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true });
   
   // Mobile fallback - ensure content is visible on small screens
@@ -59,7 +55,7 @@ export default function ExperienceSection({ variation = null }: ExperienceSectio
     delay: isMobile ? 0 : 100 
   });
   
-  const { ref: experiencesRef, visibleItems } = useStaggeredScrollAnimation(variation === 'profile' ? 8 : 7, { 
+  const { ref: experiencesRef, visibleItems } = useStaggeredScrollAnimation(8, { 
     threshold: 0.1, 
     triggerOnce: true, 
     delay: isMobile ? 0 : 150 

@@ -12,10 +12,6 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { user, isLoading, isAuthenticated } = useSimpleAuth();
   const [location] = useLocation();
   
-  // Determine variation from current location
-  const pathParts = location.split('/').filter(Boolean);
-  const variation = pathParts[0] === 'universityoftoronto' || pathParts[0] === 'queensuniversity' || pathParts[0] === 'profile' ? pathParts[0] : null;
-  const basePath = variation ? `/${variation}` : '';
 
   if (isLoading) {
     return (
@@ -52,7 +48,7 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
           </CardHeader>
           <CardContent className="space-y-4">
             <Link 
-              href={`${basePath}/sign-in`}
+              href="/sign-in"
               onClick={() => {
                 // Store current location as previous page
                 localStorage.setItem('previousPage', location);
