@@ -162,6 +162,20 @@ export default function EmailSignature() {
   );
   const getFilename = (index: number) => `signature-${String(index + 1).padStart(2, '0')}.png`;
 
+  function sanitizeForFile(value: string) {
+    return value
+      .toLowerCase()
+      .replace(/https?:\/\//g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  }
+
+  function makeFileName(email: string, website: string) {
+    const emailSlug = sanitizeForFile(email.replace('@', '-at-'));
+    const siteSlug = sanitizeForFile(website);
+    return `${siteSlug}__${emailSlug}.png`;
+  }
+
   async function exportAll() {
     if (isExporting) return;
     try {
@@ -178,10 +192,14 @@ export default function EmailSignature() {
       for (let i = 0; i < nodes.length; i++) {
         const node = nodes[i];
         setExportCount(i + 1);
+        await ensureAssetsReady(node);
+        const { width, height } = getTightSize(node);
         const dataUrl = await toPng(node, {
           backgroundColor: 'transparent',
           cacheBust: true,
           pixelRatio: 3,
+          width,
+          height,
         });
         const filenameAttr = node.getAttribute('data-filename') || getFilename(i);
         zip.file(filenameAttr, dataUrl.split(',')[1], { base64: true });
@@ -192,6 +210,22 @@ export default function EmailSignature() {
     } finally {
       setIsExporting(false);
     }
+  }
+
+  async function ensureAssetsReady(root: HTMLElement) {
+    const images = Array.from(root.querySelectorAll('img')) as HTMLImageElement[];
+    await Promise.all(
+      images.map((img) => (img.decode ? img.decode().catch(() => undefined) : Promise.resolve()))
+    );
+    // Next paint
+    await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+  }
+
+  function getTightSize(el: HTMLElement) {
+    // Use offset dimensions to avoid fractional canvas sizes
+    const width = Math.ceil(el.offsetWidth || el.getBoundingClientRect().width);
+    const height = Math.ceil(el.offsetHeight || el.getBoundingClientRect().height);
+    return { width, height };
   }
 
   let refIndex = 0;
@@ -216,7 +250,7 @@ export default function EmailSignature() {
         {emails.map((email, idx) => (
           <div key={email} className={idx === 0 ? '' : 'mt-12'}>
             <div
-              ref={el => { const i = refIndex++; if (el) { exportRefs.current[i] = el; el.setAttribute('data-filename', getFilename(i)); } }}
+              ref={el => { const i = refIndex++; if (el) { exportRefs.current[i] = el; el.setAttribute('data-filename', makeFileName(email, 'tylerbustard.ca')); } }}
               style={{ display: 'inline-block', width: 'max-content', backgroundColor: 'transparent' }}
             >
               <SignatureBlock email={email} website={'tylerbustard.ca'} logos={[unbLogo, irvingLogo, rbcLogo, tdLogo, bmoLogo, fiscalAiLogo]} role={'Equity Analyst'} org={'Fiscal.ai'} />
@@ -239,7 +273,7 @@ export default function EmailSignature() {
         ].map((email, idx) => (
           <div key={`mcgill-${email}`} className={idx === 0 ? '' : 'mt-12'}>
             <div
-              ref={el => { const i = refIndex++; if (el) { exportRefs.current[i] = el; el.setAttribute('data-filename', getFilename(i)); } }}
+              ref={el => { const i = refIndex++; if (el) { exportRefs.current[i] = el; el.setAttribute('data-filename', makeFileName(email, 'tylerbustard.com')); } }}
               style={{ display: 'inline-block', width: 'max-content', backgroundColor: 'transparent' }}
             >
               <SignatureBlock
@@ -270,7 +304,7 @@ export default function EmailSignature() {
         ].map((email, idx) => (
           <div key={`uoft-${email}`} className={idx === 0 ? '' : 'mt-12'}>
             <div
-              ref={el => { const i = refIndex++; if (el) { exportRefs.current[i] = el; el.setAttribute('data-filename', getFilename(i)); } }}
+              ref={el => { const i = refIndex++; if (el) { exportRefs.current[i] = el; el.setAttribute('data-filename', makeFileName(email, 'tylerbustard.info')); } }}
               style={{ display: 'inline-block', width: 'max-content', backgroundColor: 'transparent' }}
             >
               <SignatureBlock
@@ -299,7 +333,7 @@ export default function EmailSignature() {
         ].map((email, idx) => (
           <div key={`queens-${email}`} className={idx === 0 ? '' : 'mt-12'}>
             <div
-              ref={el => { const i = refIndex++; if (el) { exportRefs.current[i] = el; el.setAttribute('data-filename', getFilename(i)); } }}
+              ref={el => { const i = refIndex++; if (el) { exportRefs.current[i] = el; el.setAttribute('data-filename', makeFileName(email, 'tylerbustard.net')); } }}
               style={{ display: 'inline-block', width: 'max-content', backgroundColor: 'transparent' }}
             >
               <SignatureBlock
