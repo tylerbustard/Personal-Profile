@@ -10,6 +10,7 @@ import UploadResumeDashboard from "@/pages/upload-resume-dashboard";
 import ResumeVariation1 from "@/pages/resume-variation-1";
 import ResumeVariation2 from "@/pages/resume-variation-2";
 import ResumeVariation3 from "@/pages/resume-variation-3";
+import EmailSignature from "@/pages/email-signature";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { useGlobalAnimations } from "@/hooks/useGlobalAnimations";
 
@@ -20,6 +21,7 @@ function Router() {
       <Route path="/resume" component={Resume} />
       <Route path="/upload" component={UploadResumeDashboard} />
       <Route path="/sign-in" component={ResumeUploadSignIn} />
+      <Route path="/email_signature" component={EmailSignature} />
       <Route path="/resume-tech">
         <ProtectedRoute>
           <ResumeVariation1 />
