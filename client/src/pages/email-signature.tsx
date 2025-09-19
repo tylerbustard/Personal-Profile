@@ -6,7 +6,7 @@ import tdLogo from "@assets/Toronto-Dominion_Bank_logo.svg_1755913265896.png";
 import bmoLogo from "@assets/BMO_Logo.svg_1755913265896.png";
 import profileImage from "@assets/Untitled design (1)_1755896187722.png";
 import fiscalAiLogo from "@assets/fiscal_ai_logo_new.png";
-import mcgillLogo from "@assets/mcgill_1755923720192.png";
+import mcgillLogo from "@assets/mcgill_university_logo_2.png";
 import queensLogo from "@assets/queens_university_logo.png";
 import rotmanLogo from "@assets/rotman.png";
  
@@ -141,8 +141,11 @@ export default function EmailSignature() {
           <div className="mt-3 flex flex-wrap items-center gap-4 sm:gap-5">
             {logos.map((src, i) => {
               const isQueens = src === queensLogo;
+              const isRotman = src === rotmanLogo;
               const sizeClass = isQueens ? 'h-12 sm:h-14' : 'h-7 sm:h-8';
-              return <img key={i} src={src} alt="logo" className={`${sizeClass} w-auto align-middle`} />;
+              // Ensure Rotman logo matches standard size exactly
+              const normalizedSizeClass = isRotman ? 'h-7 sm:h-8' : sizeClass;
+              return <img key={i} src={src} alt="logo" className={`${normalizedSizeClass} w-auto align-middle object-contain`} />;
             })}
           </div>
         </div>
@@ -176,7 +179,13 @@ export default function EmailSignature() {
           'tylerwaynebustard@icloud.com',
         ].map((email, idx) => (
           <div key={`mcgill-${email}`} className={idx === 0 ? '' : 'mt-12'}>
-            <SignatureBlock email={email} website={'tylerbustard.com'} logos={[unbLogo, irvingLogo, rbcLogo, tdLogo, bmoLogo, fiscalAiLogo, mcgillLogo]} />
+            <SignatureBlock
+              email={email}
+              website={'tylerbustard.com'}
+              logos={[unbLogo, irvingLogo, rbcLogo, tdLogo, bmoLogo, fiscalAiLogo, mcgillLogo]}
+              role={'Master of Management in Finance Candidate, 2027'}
+              org={'Desautels Faculty of Management • McGill University'}
+            />
           </div>
         ))}
 
@@ -196,7 +205,13 @@ export default function EmailSignature() {
           'tylerwaynebustard@icloud.com',
         ].map((email, idx) => (
           <div key={`uoft-${email}`} className={idx === 0 ? '' : 'mt-12'}>
-            <SignatureBlock email={email} website={'tylerbustard.info'} logos={[unbLogo, irvingLogo, rbcLogo, tdLogo, bmoLogo, fiscalAiLogo, rotmanLogo]} />
+            <SignatureBlock
+              email={email}
+              website={'tylerbustard.info'}
+              logos={[unbLogo, irvingLogo, rbcLogo, tdLogo, bmoLogo, fiscalAiLogo, rotmanLogo]}
+              role={'Master of Business Candidate, 2026'}
+              org={'Rotman School of Management • University of Toronto'}
+            />
           </div>
         ))}
 
@@ -214,7 +229,13 @@ export default function EmailSignature() {
           'tylerwaynebustard@icloud.com',
         ].map((email, idx) => (
           <div key={`queens-${email}`} className={idx === 0 ? '' : 'mt-12'}>
-            <SignatureBlock email={email} website={'tylerbustard.net'} logos={[unbLogo, irvingLogo, rbcLogo, tdLogo, bmoLogo, fiscalAiLogo, queensLogo]} />
+            <SignatureBlock
+              email={email}
+              website={'tylerbustard.net'}
+              logos={[unbLogo, irvingLogo, rbcLogo, tdLogo, bmoLogo, fiscalAiLogo, queensLogo]}
+              role={'Master of Finance Candidate, 2027'}
+              org={'Smith School of Business • Queens University'}
+            />
           </div>
         ))}
 
