@@ -1,4 +1,8 @@
 import { Mail, Phone, Globe } from "lucide-react";
+import { useRef, useState } from "react";
+import { toPng } from "html-to-image";
+import JSZip from "jszip";
+import { saveAs } from "file-saver";
 import unbLogo from "@assets/University_of_New_Brunswick_Logo.svg_1755912478863.png";
 import irvingLogo from "@assets/Irving_Oil.svg_1755913265895.png";
 import rbcLogo from "@assets/RBC-Logo_1755913716813.png";
@@ -78,6 +82,10 @@ function buildSignatureHtml() {
 }
 
 export default function EmailSignature() {
+  const exportRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const [isExporting, setIsExporting] = useState(false);
+  const [exportCount, setExportCount] = useState(0);
+
   const emails = [
     'tylerbustard@hotmail.com',
     'tbustard@unb.ca',
@@ -152,16 +160,67 @@ export default function EmailSignature() {
       </div>
     </div>
   );
+  const getFilename = (index: number) => `signature-${String(index + 1).padStart(2, '0')}.png`;
+
+  async function exportAll() {
+    if (isExporting) return;
+    try {
+      setIsExporting(true);
+      setExportCount(0);
+      // Ensure fonts/images are ready
+      // @ts-ignore - fonts may not exist in some environments but in browsers it does
+      if (document.fonts && document.fonts.ready) {
+        try { await (document.fonts as any).ready; } catch {}
+      }
+
+      const zip = new JSZip();
+      const nodes = exportRefs.current.filter(Boolean) as HTMLDivElement[];
+      for (let i = 0; i < nodes.length; i++) {
+        const node = nodes[i];
+        setExportCount(i + 1);
+        const dataUrl = await toPng(node, {
+          backgroundColor: 'transparent',
+          cacheBust: true,
+          pixelRatio: 3,
+        });
+        const filenameAttr = node.getAttribute('data-filename') || getFilename(i);
+        zip.file(filenameAttr, dataUrl.split(',')[1], { base64: true });
+      }
+
+      const blob = await zip.generateAsync({ type: 'blob' });
+      saveAs(blob, 'email-signatures.zip');
+    } finally {
+      setIsExporting(false);
+    }
+  }
+
+  let refIndex = 0;
+
   return (
     <div className="min-h-screen flex justify-center px-4 py-12" style={{ backgroundColor: '#ffffff' }}>
       <div className="w-full max-w-2xl">
+        <div className="flex justify-center mb-6">
+          <button
+            type="button"
+            onClick={exportAll}
+            disabled={isExporting}
+            className="inline-flex items-center gap-2 rounded-md bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white px-4 py-2 text-sm font-semibold"
+          >
+            {isExporting ? `Exporting ${exportCount}/26…` : 'Export 26 PNGs'}
+          </button>
+        </div>
         <div className="text-center mb-8">
           <h2 className="text-xl sm:text-2xl font-bold text-gray-900">University of New Brunswick - tylerbustard.ca</h2>
         </div>
         
         {emails.map((email, idx) => (
           <div key={email} className={idx === 0 ? '' : 'mt-12'}>
-            <SignatureBlock email={email} website={'tylerbustard.ca'} logos={[unbLogo, irvingLogo, rbcLogo, tdLogo, bmoLogo, fiscalAiLogo]} role={'Equity Analyst'} org={'Fiscal.ai'} />
+            <div
+              ref={el => { const i = refIndex++; if (el) { exportRefs.current[i] = el; el.setAttribute('data-filename', getFilename(i)); } }}
+              style={{ display: 'inline-block', width: 'max-content', backgroundColor: 'transparent' }}
+            >
+              <SignatureBlock email={email} website={'tylerbustard.ca'} logos={[unbLogo, irvingLogo, rbcLogo, tdLogo, bmoLogo, fiscalAiLogo]} role={'Equity Analyst'} org={'Fiscal.ai'} />
+            </div>
           </div>
         ))}
 
@@ -179,13 +238,18 @@ export default function EmailSignature() {
           'tylerwaynebustard@icloud.com',
         ].map((email, idx) => (
           <div key={`mcgill-${email}`} className={idx === 0 ? '' : 'mt-12'}>
-            <SignatureBlock
-              email={email}
-              website={'tylerbustard.com'}
-              logos={[unbLogo, irvingLogo, rbcLogo, tdLogo, bmoLogo, fiscalAiLogo, mcgillLogo]}
-              role={'Master of Management in Finance Candidate, 2027'}
-              org={'Desautels Faculty of Management • McGill University'}
-            />
+            <div
+              ref={el => { const i = refIndex++; if (el) { exportRefs.current[i] = el; el.setAttribute('data-filename', getFilename(i)); } }}
+              style={{ display: 'inline-block', width: 'max-content', backgroundColor: 'transparent' }}
+            >
+              <SignatureBlock
+                email={email}
+                website={'tylerbustard.com'}
+                logos={[unbLogo, irvingLogo, rbcLogo, tdLogo, bmoLogo, fiscalAiLogo, mcgillLogo]}
+                role={'Master of Management in Finance Candidate, 2027'}
+                org={'Desautels Faculty of Management • McGill University'}
+              />
+            </div>
           </div>
         ))}
 
@@ -205,13 +269,18 @@ export default function EmailSignature() {
           'tylerwaynebustard@icloud.com',
         ].map((email, idx) => (
           <div key={`uoft-${email}`} className={idx === 0 ? '' : 'mt-12'}>
-            <SignatureBlock
-              email={email}
-              website={'tylerbustard.info'}
-              logos={[unbLogo, irvingLogo, rbcLogo, tdLogo, bmoLogo, fiscalAiLogo, rotmanLogo]}
-              role={'Master of Business Candidate, 2026'}
-              org={'Rotman School of Management • University of Toronto'}
-            />
+            <div
+              ref={el => { const i = refIndex++; if (el) { exportRefs.current[i] = el; el.setAttribute('data-filename', getFilename(i)); } }}
+              style={{ display: 'inline-block', width: 'max-content', backgroundColor: 'transparent' }}
+            >
+              <SignatureBlock
+                email={email}
+                website={'tylerbustard.info'}
+                logos={[unbLogo, irvingLogo, rbcLogo, tdLogo, bmoLogo, fiscalAiLogo, rotmanLogo]}
+                role={'Master of Business Candidate, 2026'}
+                org={'Rotman School of Management • University of Toronto'}
+              />
+            </div>
           </div>
         ))}
 
@@ -229,13 +298,18 @@ export default function EmailSignature() {
           'tylerwaynebustard@icloud.com',
         ].map((email, idx) => (
           <div key={`queens-${email}`} className={idx === 0 ? '' : 'mt-12'}>
-            <SignatureBlock
-              email={email}
-              website={'tylerbustard.net'}
-              logos={[unbLogo, irvingLogo, rbcLogo, tdLogo, bmoLogo, fiscalAiLogo, queensLogo]}
-              role={'Master of Finance Candidate, 2027'}
-              org={'Smith School of Business • Queens University'}
-            />
+            <div
+              ref={el => { const i = refIndex++; if (el) { exportRefs.current[i] = el; el.setAttribute('data-filename', getFilename(i)); } }}
+              style={{ display: 'inline-block', width: 'max-content', backgroundColor: 'transparent' }}
+            >
+              <SignatureBlock
+                email={email}
+                website={'tylerbustard.net'}
+                logos={[unbLogo, irvingLogo, rbcLogo, tdLogo, bmoLogo, fiscalAiLogo, queensLogo]}
+                role={'Master of Finance Candidate, 2027'}
+                org={'Smith School of Business • Queens University'}
+              />
+            </div>
           </div>
         ))}
 
